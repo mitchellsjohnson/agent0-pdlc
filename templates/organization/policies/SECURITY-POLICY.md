@@ -149,6 +149,27 @@ AgentSecurity should:
 3. Follow organization vulnerability thresholds
 4. Escalate per organization process
 
+### MCP Tools for Security
+
+<!-- CUSTOMIZE: Configure your MCP tools -->
+
+| MCP Server | Tools | Purpose |
+|------------|-------|---------|
+| `sonatype-mcp` | `getComponentVersion`, `getRecommendedComponentVersions` | Dependency analysis |
+| `<your-sast-mcp>` | `scan`, `getResults` | SAST scanning |
+
+See `mcp/` folder for detailed MCP configuration.
+
+### Security Skills
+
+AgentSecurity should have access to these skills:
+
+| Skill | File | Purpose |
+|-------|------|---------|
+| Lifecycle Scan | `skills/lifecycle-scan.md` | Run SCA/dependency scans |
+| SAST Scan | `skills/sast-scan.md` | Run static analysis |
+| Security Review | `skills/security-review.md` | Code review checklist |
+
 ### Veto Conditions (Organization-Specific)
 
 AgentSecurity MUST block release for:

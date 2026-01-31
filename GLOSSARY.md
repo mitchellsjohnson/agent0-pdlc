@@ -7,10 +7,19 @@ Terms and definitions used throughout the Agent0 PDLC framework.
 ## Core Concepts
 
 ### Agent0
-The orchestrating AI agent that serves as Product Owner and Technical Lead. Coordinates all other agents, plans sprints, assigns work, and manages quality.
+The orchestrating AI agent that serves as Product Owner and Technical Lead. Coordinates all other agents, plans sprints, assigns work, and manages quality. Uses the CRIT Framework to process requirements.
 
 ### PDLC
 **P**roduct **D**evelopment **L**ife**c**ycle. The framework for managing the entire software development process with AI agents.
+
+### CRIT Framework
+The methodology Agent0 uses to process requirements and bootstrap sprints:
+- **C**ontext: Gather background, goals, audience, constraints
+- **R**ole: Determine which agents and specialists are needed
+- **I**nterview: Ask clarifying questions before acting
+- **T**ask: Define specific, actionable work items
+
+Agent0 does NOT immediately act on requirements. It gathers context, interviews the user, then creates tasks.
 
 ### Beads
 A distributed, git-backed graph issue tracker designed for AI agents ([steveyegge/beads](https://github.com/steveyegge/beads)). Provides persistent, structured memory for coding agents, replacing messy markdown plans with a dependency-aware graph. Tasks, status, dependencies, and assignments are tracked in Beads.

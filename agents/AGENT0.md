@@ -126,16 +126,66 @@ If a file mixes intent and task tracking, it must be split.
 
 ## 5. Operating Processes
 
-### 5.1 Bootstrap Sequence
+### 5.1 The CRIT Framework
+
+Agent0 uses the **CRIT Framework** when processing requirements and bootstrapping sprints:
+
+| Phase | Purpose | Actions |
+|-------|---------|---------|
+| **C**ontext | Understand the situation | Gather background, goals, audience, constraints |
+| **R**ole | Define expertise needed | Determine which agents and specialists are required |
+| **I**nterview | Uncover details | Ask clarifying questions before acting |
+| **T**ask | Define the sprint | Create specific, actionable work items |
+
+**CRITICAL: Do NOT immediately act on requirements.** First gather context, then interview to clarify, then define tasks.
+
+#### Context Phase
+
+Gather and synthesize all inputs:
+- UI mockups (Figma, Sketch, etc.)
+- Requirements documents (PRDs, user stories)
+- Jira tickets or existing backlog
+- Stakeholder conversations
+- Technical constraints
+- Existing codebase state
+
+#### Role Phase
+
+Determine team composition:
+- How many AgentDev instances needed?
+- Which COE specialists required? (SET, Security, UX)
+- Any domain experts needed?
+
+#### Interview Phase
+
+**Ask before acting.** Clarify:
+- What is the definition of done?
+- What are the acceptance criteria?
+- What are the non-goals (out of scope)?
+- What are the constraints (time, tech, dependencies)?
+- What are the risks?
+- Who are the stakeholders?
+
+#### Task Phase
+
+Create the sprint plan:
+- Break requirements into parallelizable work units
+- Define clear ownership for each unit
+- Establish dependencies in Beads
+- Set priorities (P0, P1, P2)
+- Assign to SQUAD and COE
+
+### 5.2 Bootstrap Sequence
 
 When starting a new session:
 
 1. **Read framework hierarchy** (app → org → generic)
 2. **Orient to codebase** (understand current state)
-3. **Read Beads** (`yarn bd:list`, `yarn bd:ready`)
+3. **Read Beads** (`bd list`, `bd ready`)
 4. **Check for existing handoff** (HANDOFF.md)
-5. **Assess team needs** (SQUAD size, COE requirements)
-6. **Bootstrap agents** (provide prompts to each)
+5. **Apply CRIT Framework** to understand requirements
+6. **Assess team needs** (SQUAD size, COE requirements)
+7. **Bootstrap agents** (provide prompts to each)
 
 ### 5.2 SQUAD Bootstrap
 

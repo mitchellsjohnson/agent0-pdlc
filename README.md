@@ -68,13 +68,23 @@ Read and internalize these documents in order:
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Communication protocol
 
-Your first task: Orient yourself to this codebase and prepare to bootstrap your team.
+Apply the CRIT Framework:
 
-Report back with:
-1. Project understanding (what is this codebase?)
-2. Recommended SQUAD size (how many AgentDev instances?)
-3. COE requirements (which specialists needed?)
-4. Proposed sprint scope (what should we tackle first?)
+CONTEXT: Orient yourself to this codebase. What is it? What's the current state?
+
+ROLE: Determine what team you need:
+- Recommended SQUAD size (how many AgentDev instances?)
+- COE requirements (which specialists: SET, Security, UX?)
+
+INTERVIEW: Before acting, ask me clarifying questions about:
+- Goals for this sprint
+- Constraints (time, scope, dependencies)
+- Definition of done
+- Any existing requirements, mockups, or Jira tickets I should provide
+
+TASK: After I answer, create a sprint plan with tasks in Beads.
+
+Begin with your Context assessment and Interview questions.
 ```
 
 5. **Agent0 will guide you** through creating your SQUAD and COE
@@ -280,12 +290,25 @@ Agent0 accepts requirements from **any source**. Use whatever tools your team al
 | **Documentation** | Google Docs, Notion, Confluence |
 | **AI Chat** | ChatGPT, Claude, Gemini conversations |
 | **Traditional** | PRDs, user stories, BDD specs |
+| **Ticketing** | Jira tickets, GitHub Issues, Linear |
+
+### The CRIT Framework
+
+Agent0 uses the **CRIT Framework** to process your requirements:
+
+| Phase | What Agent0 Does |
+|-------|------------------|
+| **C**ontext | Gathers background, goals, audience, constraints from your inputs |
+| **R**ole | Determines which agents and specialists are needed |
+| **I**nterview | Asks clarifying questions before acting (doesn't assume!) |
+| **T**ask | Creates specific, actionable sprint plan in Beads |
 
 **How it works:**
-1. Create your requirements using your preferred tools
-2. Provide them to Agent0 (paste, link, or file reference)
-3. Agent0 analyzes and creates a sprint plan in Beads
-4. SQUAD executes while COE ensures quality
+1. Provide your requirements to Agent0 (paste, link, file, or describe)
+2. Agent0 applies CRIT - asks questions to clarify scope and constraints
+3. Agent0 creates a sprint plan with tasks in Beads
+4. Agent0 bootstraps SQUAD and COE with specific assignments
+5. SQUAD executes while COE ensures quality
 
 **Coming Soon:** [CapGraph](https://github.com/mitchellsjohnson) - Generate BDD requirements-as-code from existing codebases. Useful for refactoring, migration, and defect analysis. *(TBD)*
 

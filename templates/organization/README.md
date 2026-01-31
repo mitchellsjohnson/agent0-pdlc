@@ -60,19 +60,31 @@ agent0-pdlc-<your-org>/
 ├── README.md                     # This file
 ├── ORGANIZATION-RULES.md         # Org-wide rules (extends generic)
 │
-├── policies/
-│   ├── SECURITY-POLICY.md        # Security requirements
-│   ├── UX-STANDARDS.md           # UX/Design standards
-│   ├── TESTING-POLICY.md         # Testing requirements
+├── policies/                     # Policies all apps must follow
+│   ├── SECURITY-POLICY.md        # Security requirements, scan thresholds
+│   ├── UX-STANDARDS.md           # UX/Design standards, component library
+│   ├── TESTING-POLICY.md         # Testing requirements, coverage targets
 │   └── TECH-STACK.md             # Approved technologies
+│
+├── integrations/                 # Tool integrations
+│   ├── JIRA-INTEGRATION.md       # Jira project setup, workflows
+│   ├── LIFECYCLE-INTEGRATION.md  # SCA scanning (Sonatype Lifecycle, etc.)
+│   ├── SAST-INTEGRATION.md       # SAST tool configuration
+│   └── SOURCE-CONTROL.md         # Git standards, branch policies
+│
+├── mcp/                          # MCP Server configurations
+│   └── README.md                 # How to configure MCP tools
 │
 ├── agents/
 │   └── extensions/               # Agent extensions (optional)
 │       ├── AGENTUX-ORG.md        # Org-specific UX rules
 │       └── AGENTSECURITY-ORG.md  # Org-specific security rules
 │
-├── skills/                       # Organization skills
-│   └── README.md                 # How to add skills
+├── skills/                       # Organization-wide AI skills
+│   ├── README.md                 # How to add skills
+│   ├── lifecycle-scan.md         # Skill: Run SCA scans
+│   ├── sast-scan.md              # Skill: Run SAST scans
+│   └── jira-workflow.md          # Skill: Create/update Jira tickets
 │
 └── resources/                    # Shared resources
     ├── personas/                 # User personas (if defined)
