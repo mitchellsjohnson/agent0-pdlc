@@ -1,0 +1,411 @@
+# Agent0 PDLC
+
+**The Agentic Product Development Lifecycle Framework**
+
+> *Scale your software delivery 10x with AI-powered autonomous agent teams. Transform how enterprise software gets built.*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub](https://img.shields.io/badge/GitHub-mitchellsjohnson%2Fagent0--pdlc-blue)](https://github.com/mitchellsjohnson/agent0-pdlc)
+
+---
+
+## What is Agent0 PDLC?
+
+Agent0 PDLC is an open-source framework for orchestrating AI agent teams that work together to deliver production-quality software at unprecedented scale. It provides:
+
+- **🤖 Multi-Agent Orchestration**: Agent0 (Tech Lead) coordinates specialized agents (Dev, Security, Testing, UX)
+- **📋 Structured Communication**: [Beads](https://github.com/steveyegge/beads) for machine-readable task tracking
+- **🏢 Three-Tier Architecture**: Generic → Organization → Application customization
+- **🔄 Sprint-Based Delivery**: Automated planning, execution, QA, and handoffs
+- **🔌 Tool Agnostic**: Works with Cursor, Claude, ChatGPT, or any GenAI coding assistant
+- **📝 Requirements Agnostic**: Bring requirements from Figma, Lovable, Google Docs, AI chat tools, or any source
+
+### The Vision
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           AGENT0 PDLC FRAMEWORK                             │
+│                                                                             │
+│   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐                  │
+│   │   Agent0    │────▶│    SQUAD    │     │     COE     │                  │
+│   │  (Tech Lead)│     │  AgentDev1  │     │  AgentSET   │                  │
+│   │             │     │  AgentDev2  │     │  AgentSec   │                  │
+│   │  Orchestrate│     │  AgentDev3  │     │  AgentUX    │                  │
+│   │  Plan       │     │     ...     │     │             │                  │
+│   │  QA         │     └─────────────┘     └─────────────┘                  │
+│   └─────────────┘            │                   │                         │
+│          │                   │                   │                         │
+│          ▼                   ▼                   ▼                         │
+│   ┌─────────────────────────────────────────────────────────────────────┐  │
+│   │                         BEADS PROTOCOL                              │  │
+│   │              Machine-readable task tracking & coordination          │  │
+│   └─────────────────────────────────────────────────────────────────────┘  │
+│                                    │                                        │
+│                                    ▼                                        │
+│   ┌─────────────────────────────────────────────────────────────────────┐  │
+│   │                        YOUR CODEBASE                                │  │
+│   │                 Delivered, Tested, Secure, Beautiful                │  │
+│   └─────────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🚀 Quick Start
+
+### Step 1: Bootstrap Agent0 in Cursor
+
+1. **Open Cursor IDE** in your project
+2. **Open Agent Panel** (Cmd+L / Ctrl+L)
+3. **Select your model** (Claude Sonnet 4, Claude Opus 4, GPT-4, etc.)
+4. **Paste the Agent0 Bootstrap Prompt:**
+
+```
+You are Agent0, the Product Owner and Technical Lead for this project.
+
+Read and internalize these documents in order:
+1. agent0-pdlc/agents/AGENT0.md - Your operating manual
+2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
+3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Communication protocol
+
+Your first task: Orient yourself to this codebase and prepare to bootstrap your team.
+
+Report back with:
+1. Project understanding (what is this codebase?)
+2. Recommended SQUAD size (how many AgentDev instances?)
+3. COE requirements (which specialists needed?)
+4. Proposed sprint scope (what should we tackle first?)
+```
+
+5. **Agent0 will guide you** through creating your SQUAD and COE
+
+### Step 2: Bootstrap with Claude (iTerm2 Multi-Session)
+
+See [workflows/CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) for detailed instructions on running Agent0 with multiple Claude sessions.
+
+**SQUAD Window** - Agent0 + AgentDev instances working in parallel:
+
+![SQUAD Window](docs/images/claude-iterm2-squad.png)
+
+**COE Window** - AgentSET + AgentSecurity + AgentUX specialists:
+
+![COE Window](docs/images/claude-iterm2-coe.png)
+
+**Layout Overview:**
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          iTerm2 LAYOUT                                  │
+├─────────────────────────────────┬───────────────────────────────────────┤
+│         SQUAD WINDOW            │           COE WINDOW                  │
+│  ┌───────────┬───────────┐     │  ┌───────────┬───────────┐           │
+│  │  Agent0   │ AgentDev1 │     │  │ AgentSET  │ AgentSec  │           │
+│  │ (Leader)  │           │     │  │ (Testing) │ (Security)│           │
+│  ├───────────┼───────────┤     │  ├───────────┼───────────┤           │
+│  │ AgentDev2 │ AgentDev3 │     │  │ AgentUX   │  (Empty)  │           │
+│  └───────────┴───────────┘     │  └───────────┴───────────┘           │
+└─────────────────────────────────┴───────────────────────────────────────┘
+```
+
+---
+
+## 📁 Three-Tier Architecture
+
+Agent0 PDLC uses a three-tier inheritance model that allows customization at each level:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  TIER 1: GENERIC (This Repo - Public)                                       │
+│  agent0-pdlc/                                                               │
+│  - Agent operating manuals (generic)                                        │
+│  - Workflow documentation                                                   │
+│  - Beads protocol integration                                               │
+│  - Templates for Org and App levels                                         │
+│  - Tool-agnostic (any language, framework, cloud)                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼ Your org extends this
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  TIER 2: ORGANIZATION (Your Private Repo - Optional)                        │
+│  agent0-pdlc-<your-org>/                                                    │
+│  - Organization security policies                                           │
+│  - Shared UX standards & design system                                      │
+│  - Approved tech stack                                                      │
+│  - Organization-wide AI skills                                              │
+│  - MCP tools, security tools, build tools                                   │
+│  - Ticketing integrations (Jira, Linear, etc.)                              │
+│  Example: agent0-pdlc-sonatype/ (Sonatype's internal policies)              │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼ Each app extends org
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  TIER 3: APPLICATION (In Your App Repo)                                     │
+│  agent0-pdlc-<app-name>/                                                    │
+│  - App-specific build instructions                                          │
+│  - App-specific testing strategy                                            │
+│  - App-specific security strategy                                           │
+│  - App-specific UX strategy                                                 │
+│  - Codebase-specific skills                                                 │
+│  Example: agent0-pdlc-nexus-internal/ (Nexus Repository config)             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Precedence:** When rules conflict, higher tiers override lower:
+- Application > Organization > Generic
+
+---
+
+## 🛠️ Setup Instructions
+
+### 1. Clone the Framework
+
+```bash
+# Clone the generic framework
+git clone https://github.com/mitchellsjohnson/agent0-pdlc.git
+
+# Or add as submodule to your project
+git submodule add https://github.com/mitchellsjohnson/agent0-pdlc.git
+```
+
+### 2. Create Your Organization Repo
+
+```bash
+# Create your organization-level repo
+mkdir agent0-pdlc-<your-org>
+cd agent0-pdlc-<your-org>
+git init
+
+# Copy the organization template
+cp -r ../agent0-pdlc/templates/organization/* .
+
+# Customize these files:
+# - ORGANIZATION-RULES.md (your org's non-negotiable rules)
+# - policies/SECURITY-POLICY.md (link to your security policy)
+# - policies/UX-STANDARDS.md (link to your design system)
+# - policies/TECH-STACK.md (approved languages, frameworks)
+# - skills/ (organization-specific AI skills)
+```
+
+**Key files to customize:**
+
+| File | Purpose | What to Add |
+|------|---------|-------------|
+| `ORGANIZATION-RULES.md` | Org-wide rules | Your compliance, legal, process requirements |
+| `policies/SECURITY-POLICY.md` | Security standards | Link to your security policy, scanning tools |
+| `policies/UX-STANDARDS.md` | Design system | Link to your component library, style guide |
+| `policies/TECH-STACK.md` | Approved technologies | Languages, frameworks, databases allowed |
+| `skills/` | AI skills | Custom skills for your org's tools |
+
+### 3. Add Application-Level Configuration
+
+In your application repository:
+
+```bash
+# Create the app-level folder
+mkdir agent0-pdlc-<app-name>
+
+# Copy the application template
+cp -r ../agent0-pdlc/templates/application/* agent0-pdlc-<app-name>/
+
+# Customize these files:
+# - BUILD-INSTRUCTIONS.md (how to build THIS app)
+# - TESTING-STRATEGY.md (testing for THIS app)
+# - agents/ (app-specific agent overrides)
+```
+
+### 4. Give AI Access to All Tiers
+
+When working with your AI agent, ensure it has access to:
+
+1. **This repo** (`agent0-pdlc/`) - Generic framework
+2. **Your org repo** (`agent0-pdlc-<your-org>/`) - Org policies
+3. **Your app folder** (`agent0-pdlc-<app-name>/`) - App specifics
+
+**In Cursor:** Add all three as workspace folders
+**In Claude:** Reference all three repos in your project
+
+---
+
+## 📚 Core Concepts
+
+### Agents
+
+| Agent | Role | Responsibility |
+|-------|------|----------------|
+| **Agent0** | Tech Lead / Orchestrator | Plans sprints, assigns work, QAs output, manages handoffs |
+| **AgentDev** | Software Engineer | Implements features, fixes bugs, writes code |
+| **AgentSET** | Software Engineer in Test | Defines test strategy, ensures quality, blocks on failures |
+| **AgentSecurity** | Security Architect | Reviews security, scans dependencies, has release veto |
+| **AgentUX** | UX Architect | Enforces design standards, ensures consistency |
+
+### Beads Protocol
+
+[Beads](https://github.com/steveyegge/beads) is a distributed, git-backed graph issue tracker designed for AI agents. It provides persistent, structured memory for coding agents, replacing messy markdown plans with a dependency-aware graph.
+
+**Install Beads:**
+```bash
+# Install via npm
+npm install -g @beads/bd
+
+# Or via Homebrew
+brew install beads
+
+# Initialize in your project
+cd your-project
+bd init
+```
+
+**Core Commands:**
+```bash
+bd ready                    # List tasks with no open blockers
+bd create "Title" -p 0      # Create a P0 task
+bd dep add <child> <parent> # Link tasks (blocks, related, parent-child)
+bd show <id>                # View task details and audit trail
+bd list                     # View all tasks
+```
+
+**The Golden Rule:**
+> **Markdown (.md) is for humans** - explains what, why, decisions
+> **Beads is for machines** - tracks tasks, status, ownership, dependencies
+
+Learn more at [steveyegge/beads](https://github.com/steveyegge/beads).
+
+### Bringing Your Requirements
+
+Agent0 accepts requirements from **any source**. Use whatever tools your team already uses:
+
+| Tool Category | Examples |
+|---------------|----------|
+| **Design Tools** | Figma, Sketch, Adobe XD |
+| **AI Prototyping** | Lovable, v0, Bolt |
+| **Documentation** | Google Docs, Notion, Confluence |
+| **AI Chat** | ChatGPT, Claude, Gemini conversations |
+| **Traditional** | PRDs, user stories, BDD specs |
+
+**How it works:**
+1. Create your requirements using your preferred tools
+2. Provide them to Agent0 (paste, link, or file reference)
+3. Agent0 analyzes and creates a sprint plan in Beads
+4. SQUAD executes while COE ensures quality
+
+**Coming Soon:** [CapGraph](https://github.com/mitchellsjohnson) - Generate BDD requirements-as-code from existing codebases. Useful for refactoring, migration, and defect analysis. *(TBD)*
+
+### SQUAD vs COE
+
+| Structure | Purpose | Members |
+|-----------|---------|---------|
+| **SQUAD** | Delivery team | Agent0 + AgentDev instances (1-4) |
+| **COE** | Center of Excellence | AgentSET + AgentSecurity + AgentUX |
+
+- **SQUAD** does the work (implementing features)
+- **COE** ensures quality (testing, security, UX review)
+
+---
+
+## 📖 Documentation
+
+### Agent Operating Manuals
+
+- [AGENT0.md](agents/AGENT0.md) - Product Owner / Technical Lead
+- [AGENTDEV.md](agents/AGENTDEV.md) - Software Engineer
+- [AGENTSET.md](agents/AGENTSET.md) - Software Engineer in Test
+- [AGENTSECURITY.md](agents/AGENTSECURITY.md) - Security Architect
+- [AGENTUX.md](agents/AGENTUX.md) - UX Architect
+
+### Workflows
+
+- [CURSOR-SETUP.md](workflows/CURSOR-SETUP.md) - Cursor IDE integration
+- [CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) - Claude with iTerm2
+- [SQUAD-BOOTSTRAP.md](workflows/SQUAD-BOOTSTRAP.md) - Creating your SQUAD
+- [COE-BOOTSTRAP.md](workflows/COE-BOOTSTRAP.md) - Creating your COE
+- [SPRINT-WORKFLOW.md](workflows/SPRINT-WORKFLOW.md) - Running a sprint
+- [HANDOFF-PROTOCOL.md](workflows/HANDOFF-PROTOCOL.md) - Session handoffs
+
+### Templates
+
+- [templates/organization/](templates/organization/) - Org-level template
+- [templates/application/](templates/application/) - App-level template
+
+### Reference
+
+- [GLOBAL-RULES.md](GLOBAL-RULES.md) - Non-negotiable framework rules
+- [BEADS-PROTOCOL.md](workflows/BEADS-PROTOCOL.md) - Task tracking specification
+- [GLOSSARY.md](GLOSSARY.md) - Terms and definitions
+
+---
+
+## 🎯 Example: Full Bootstrap Sequence
+
+```
+Day 1: Setup
+
+1. Clone agent0-pdlc (this repo)
+2. Create agent0-pdlc-acme-corp (your org repo)
+   - Add security policy link
+   - Add UX standards link
+   - Add tech stack constraints
+3. Create agent0-pdlc-widget-app (in your app repo)
+   - Add build instructions
+   - Add testing strategy
+
+Day 1: Bootstrap Agent0
+
+4. Open Cursor in widget-app
+5. Add all three repos to workspace
+6. Paste Agent0 bootstrap prompt
+7. Agent0 reads all three tiers
+8. Agent0 proposes SQUAD + COE structure
+
+Day 1: Bootstrap Team
+
+9. Agent0 gives you prompts for each agent
+10. Create SQUAD window (iTerm2 or Cursor tabs)
+11. Create COE window
+12. Each agent reads their operating manual + org + app context
+
+Day 1: First Sprint
+
+13. Agent0 creates sprint plan in Beads
+14. Agent0 assigns tasks to SQUAD
+15. AgentDev instances work in parallel
+16. COE reviews (AgentSET tests, AgentSecurity scans, AgentUX reviews)
+17. Agent0 QAs and accepts work
+
+Day 1: Handoff
+
+18. Agent0 creates HANDOFF.md
+19. Beads synced
+20. Ready for next session
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Areas for Contribution
+
+- Additional agent templates (AgentDocs, AgentOps, etc.)
+- Integration guides for other AI tools
+- Language-specific testing templates
+- CI/CD integration examples
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- Built on the shoulders of software engineering best practices
+- Inspired by agile methodologies and DevOps culture
+- Powered by modern AI language models
+
+---
+
+**Ready to scale your software delivery?** Start with the [Quick Start](#-quick-start) above.
+
+*Agent0 PDLC - Where AI agents meet enterprise software delivery.*

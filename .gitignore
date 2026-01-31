@@ -1,0 +1,28 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Local development
+.env
+.env.local
+*.local
+
+# Beads local cache (committed files are in .beads/)
+.beads/*.db
+.beads/*.sqlite
+
+# Logs
+*.log
+logs/
