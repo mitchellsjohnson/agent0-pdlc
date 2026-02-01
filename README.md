@@ -53,7 +53,7 @@ Agent0 PDLC is an open-source framework for orchestrating AI agent teams that wo
 
 ## 🚀 Quick Start
 
-Agent0 PDLC works with any AI coding assistant. Choose your preferred tool:
+Agent0 PDLC works with any AI coding assistant:
 
 | Tool | Best For |
 |------|----------|
@@ -65,24 +65,76 @@ Agent0 PDLC works with any AI coding assistant. Choose your preferred tool:
 
 ---
 
-### Option A: Cursor IDE
+### Option A: Cursor IDE - New Application
+
+Use this when starting a brand new project from scratch.
+
+1. **Create a new folder** for your project
+2. **Open Cursor IDE** in that folder
+3. **Open Agent Panel** (Cmd+L / Ctrl+L)
+4. **Paste the New App Bootstrap Prompt:**
+
+```
+You are Agent0, the Product Owner and Technical Lead.
+
+Read and internalize these documents:
+1. agent0-pdlc/agents/AGENT0.md - Your operating manual
+2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
+3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
+
+We are starting a NEW APPLICATION from scratch.
+
+Apply the CRIT Framework:
+
+CONTEXT: This is an empty project. We will build something new.
+
+ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
+(AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
+
+INTERVIEW: Before planning, ask me clarifying questions about:
+- What are we building? (web app, API, CLI, mobile app, etc.)
+- What tech stack should we use?
+- What are the core features for MVP?
+- Any design mockups, wireframes, or requirements docs?
+- Constraints (timeline, hosting, budget)
+- Definition of done for v1
+
+TASK: After I answer:
+1. Create project structure and initial files
+2. Set up agent0-pdlc-<appname>/ folder with app-specific config
+3. Initialize Beads for task tracking
+4. Create a sprint plan for the MVP
+5. Provide me exact instructions to spin up the SQUAD and COE
+
+You are the orchestrator. Guide me step by step.
+
+Begin with your Interview questions.
+```
+
+5. **Agent0 will interview you** about what to build, then guide you through setup
+
+---
+
+### Option B: Cursor IDE - Existing Application
+
+Use this when working on an existing codebase.
 
 1. **Open Cursor IDE** in your project
 2. **Open Agent Panel** (Cmd+L / Ctrl+L)
-3. **Select your model** (Claude Sonnet 4, Claude Opus 4, GPT-4, etc.)
-4. **Paste the Agent0 Bootstrap Prompt:**
+3. **Paste the Existing App Bootstrap Prompt:**
 
 ```
 You are Agent0, the Product Owner and Technical Lead for this project.
 
-Read and internalize these documents in order:
+Read and internalize these documents:
 1. agent0-pdlc/agents/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
 
 Apply the CRIT Framework to bootstrap this sprint:
 
-CONTEXT: Orient yourself to this codebase and current state.
+CONTEXT: Orient yourself to this codebase. Explore the structure, understand 
+what it does, identify the tech stack and architecture.
 
 ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
 (AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
@@ -108,13 +160,17 @@ You are the orchestrator. Guide me step by step.
 Begin with your Context assessment and Interview questions.
 ```
 
-5. **Agent0 will guide you** through creating your SQUAD and COE, providing exact prompts for each agent
+4. **Agent0 will explore your codebase**, then interview you about the sprint
 
 ---
 
-### Option B: Claude CLI (iTerm2 Multi-Session)
+### Option C: Claude CLI (iTerm2 Multi-Session)
 
-See [workflows/CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) for detailed instructions on running Agent0 with multiple Claude sessions in parallel.
+For parallel multi-agent sessions, use Claude CLI in iTerm2. Use the same prompts above:
+- **New App**: Use the "New Application" prompt from Option A
+- **Existing App**: Use the "Existing Application" prompt from Option B
+
+See [workflows/CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) for detailed setup instructions.
 
 **SQUAD Window** - Agent0 + AgentDev instances working in parallel:
 
