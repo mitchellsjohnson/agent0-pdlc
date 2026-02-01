@@ -147,6 +147,18 @@ You are the orchestrator. Guide me step by step.
 Begin by checking for the framework, then ask your Interview questions.
 ```
 
+**Example: Cursor with New App (Barista MVP)**
+
+![Cursor New App Example](docs/images/cursor-new-app-sample.png)
+
+This shows Agent0 orchestrating a sprint with:
+- **Agent0**: Leading the sprint, coordinating all agents
+- **AgentDev1**: Fixing Jest ESM issues
+- **AgentSecurity**: Scanning dependencies via sonatype-mcp
+- **AgentUX**: Reviewing CLI output
+- **AgentSET**: Reviewing tests after Dev1 completes
+- **19 files created/modified** in parallel execution
+
 ---
 
 #### Option B: Existing Application (working on existing codebase)
