@@ -65,37 +65,73 @@ Agent0 PDLC works with any AI coding assistant:
 
 ---
 
-### Option A: Cursor IDE - New Application
+### Step 1: Set Up the Framework
 
-Use this when starting a brand new project from scratch.
+Before bootstrapping Agent0, ensure the framework is available in your workspace.
+
+**Option 1: Clone as submodule (recommended for teams)**
+```bash
+git submodule add https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
+```
+
+**Option 2: Clone as folder**
+```bash
+git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
+```
+
+**Option 3: Already set up?** If `agent0-pdlc/` folder exists in your workspace, skip to Step 2.
+
+**Organization-Level Config (Optional)**
+
+If your organization has a shared config repo (e.g., `agent0-pdlc-sonatype`), clone it too:
+```bash
+git clone https://github.com/yourorg/agent0-pdlc-yourorg.git agent0-pdlc-yourorg
+```
+
+---
+
+### Step 2: Bootstrap Agent0
+
+Choose the prompt based on your scenario:
+
+#### Option A: New Application (starting from scratch)
 
 1. **Create a new folder** for your project
-2. **Open Cursor IDE** in that folder
-3. **Open Agent Panel** (Cmd+L / Ctrl+L)
+2. **Clone the framework** (see Step 1)
+3. **Open your AI tool** (Cursor, Claude, etc.)
 4. **Paste the New App Bootstrap Prompt:**
 
 ```
 You are Agent0, the Product Owner and Technical Lead.
 
-Read and internalize these documents:
+FIRST: Check if the framework exists in this workspace:
+- Look for agent0-pdlc/ folder
+- If missing, tell me to run: git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
+
+FRAMEWORK (read if exists):
 1. agent0-pdlc/agents/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
+
+ORGANIZATION (check if exists):
+- Look for agent0-pdlc-*/ folders (e.g., agent0-pdlc-sonatype)
+- If found, read ORGANIZATION-RULES.md and policies/
 
 We are starting a NEW APPLICATION from scratch.
 
 Apply the CRIT Framework:
 
-CONTEXT: This is an empty project. We will build something new.
+CONTEXT: This is an empty/new project. Confirm framework is set up.
 
 ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
 (AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
 
-INTERVIEW: Before planning, ask me clarifying questions about:
+INTERVIEW: Before planning, ask me:
 - What are we building? (web app, API, CLI, mobile app, etc.)
 - What tech stack should we use?
 - What are the core features for MVP?
 - Any design mockups, wireframes, or requirements docs?
+- Do we have an organization-level config to use?
 - Constraints (timeline, hosting, budget)
 - Definition of done for v1
 
@@ -108,38 +144,44 @@ TASK: After I answer:
 
 You are the orchestrator. Guide me step by step.
 
-Begin with your Interview questions.
+Begin by checking for the framework, then ask your Interview questions.
 ```
-
-5. **Agent0 will interview you** about what to build, then guide you through setup
 
 ---
 
-### Option B: Cursor IDE - Existing Application
+#### Option B: Existing Application (working on existing codebase)
 
-Use this when working on an existing codebase.
-
-1. **Open Cursor IDE** in your project
-2. **Open Agent Panel** (Cmd+L / Ctrl+L)
-3. **Paste the Existing App Bootstrap Prompt:**
+1. **Open your AI tool** in your project
+2. **Paste the Existing App Bootstrap Prompt:**
 
 ```
 You are Agent0, the Product Owner and Technical Lead for this project.
 
-Read and internalize these documents:
+FIRST: Check what framework components exist in this workspace:
+- agent0-pdlc/ (generic framework) - required
+- agent0-pdlc-<org>/ (organization config) - optional
+- agent0-pdlc-<app>/ (app-specific config) - optional
+
+If agent0-pdlc/ is missing, tell me to run:
+git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
+
+FRAMEWORK (read in order of precedence: app > org > generic):
 1. agent0-pdlc/agents/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
+4. agent0-pdlc-<org>/ORGANIZATION-RULES.md - Org policies (if exists)
+5. agent0-pdlc-<app>/BUILD-INSTRUCTIONS.md - App build guide (if exists)
 
 Apply the CRIT Framework to bootstrap this sprint:
 
 CONTEXT: Orient yourself to this codebase. Explore the structure, understand 
-what it does, identify the tech stack and architecture.
+what it does, identify the tech stack and architecture. Note which framework
+components exist.
 
 ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
 (AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
 
-INTERVIEW: Before planning, ask me clarifying questions about:
+INTERVIEW: Before planning, ask me:
 - Sprint name and goals
 - Jira ticket numbers in scope (e.g., PROJ-123, PROJ-124, PROJ-125)
 - Requirements (mockups, PRDs, user stories)
