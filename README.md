@@ -77,16 +77,18 @@ ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE
 
 INTERVIEW: Before planning, ask me clarifying questions about:
 - Sprint name and goals
-- Requirements (mockups, Jira tickets, PRDs, user stories)
+- Jira ticket numbers in scope (e.g., PROJ-123, PROJ-124, PROJ-125)
+- Requirements (mockups, PRDs, user stories)
 - Constraints (time, scope, dependencies)
 - Definition of done
 
 TASK: After I answer:
-1. Create a sprint plan with tasks in Beads
+1. Create a sprint plan with tasks in Beads, linked to Jira tickets
 2. Determine how many AgentDev instances needed (1-4 based on parallelizable work)
 3. Provide me exact instructions to spin up each agent:
    - What to name each agent (e.g., "<Sprint Name> - AgentDev1")
    - The exact prompt to paste for each agent
+   - Which Jira ticket(s) each agent owns
    - Which window/tab to create them in (SQUAD vs COE)
 
 You are the orchestrator. Guide me step by step.

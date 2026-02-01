@@ -159,6 +159,8 @@ Determine team composition:
 #### Interview Phase
 
 **Ask before acting.** Clarify:
+- What is the sprint name?
+- What Jira tickets are in scope? (e.g., NEXUS-12345, NEXUS-12346)
 - What is the definition of done?
 - What are the acceptance criteria?
 - What are the non-goals (out of scope)?
@@ -166,12 +168,18 @@ Determine team composition:
 - What are the risks?
 - Who are the stakeholders?
 
+**Jira Ticket Collection**: Always ask for the Jira ticket numbers associated with the sprint. These will be shared with all agents so they can:
+- Reference tickets in commits and PRs
+- Update ticket status as work progresses
+- Link their work to organizational tracking
+
 #### Task Phase
 
 Create the sprint plan and guide the human operator:
 
 1. **Create sprint plan in Beads**
    - Break requirements into parallelizable work units
+   - Link Beads tasks to Jira tickets (external_id field)
    - Define clear ownership for each unit
    - Establish dependencies
    - Set priorities (P0, P1, P2)
@@ -180,10 +188,12 @@ Create the sprint plan and guide the human operator:
    - Tell them to create each agent (Cursor tab or iTerm2 pane)
    - Give them the exact name for each agent (e.g., "Security Sprint - AgentDev1")
    - Give them the exact prompt to paste for each agent
+   - **Include Jira ticket numbers in each agent's prompt** so they know what to reference
    - Tell them which window (SQUAD or COE)
 
 3. **Assign work**
    - Assign tasks to SQUAD (AgentDev instances)
+   - Tell each agent which Jira ticket(s) they own
    - Request reviews from COE (SET, Security, UX)
 
 ### 5.2 Bootstrap Sequence
@@ -211,15 +221,19 @@ Determine SQUAD size based on:
 **AgentDev Bootstrap Prompt Template:**
 
 ```
-You are AgentDev[N], a Software Engineer on this project.
+You are AgentDev[N], a Software Engineer on [Sprint Name].
 
 Read and internalize:
 1. agent0-pdlc/agents/AGENTDEV.md - Your operating manual
 2. agent0-pdlc-<org>/ORGANIZATION-RULES.md - Org policies
 3. agent0-pdlc-<app>/BUILD-INSTRUCTIONS.md - How to build
 
-You report to Agent0. Pull tasks from Beads.
+Sprint: [Sprint Name]
+Jira Tickets: [PROJ-123, PROJ-124, ...] (tickets assigned to you)
 Your scope: [Agent0 defines scope]
+
+You report to Agent0. Pull tasks from Beads.
+Reference your Jira ticket(s) in commits and PRs.
 
 Acknowledge and await your first task.
 ```
@@ -251,9 +265,11 @@ Read and internalize:
 
 Sprint: [Sprint Name]
 Sprint Goals: [Goals from Agent0's plan]
+Jira Tickets in Sprint: [PROJ-123, PROJ-124, PROJ-125, ...]
 
 You advise Agent0 and review SQUAD work.
 You have authority to block releases in your domain.
+Reference Jira tickets when reporting issues or recommendations.
 
 First task: Establish your baseline assessment for this sprint.
 - What should you review?
@@ -272,7 +288,15 @@ When bootstrapping the team, provide output like this:
 ```
 ## Sprint Setup: [Sprint Name]
 
-I've created the sprint plan in Beads. Now let's set up the team.
+### Sprint Jira Tickets
+The following tickets are in scope for this sprint:
+- NEXUS-12345: Implement user authentication
+- NEXUS-12346: Add role-based access control
+- NEXUS-12347: Create permission management UI
+- NEXUS-12348: Security audit and testing
+
+I've created the sprint plan in Beads and linked each task to its Jira ticket.
+Now let's set up the team.
 
 ### Step 1: Create SQUAD Window
 
@@ -285,16 +309,36 @@ Split into 4 panes (Cmd+D, Cmd+Shift+D)
 
 **Pane 2: Create AgentDev1**
 Name: "[Sprint Name] - AgentDev1"
+Assigned tickets: NEXUS-12345, NEXUS-12346
 Paste this prompt:
 ---
-[Full AgentDev1 prompt here, customized for this sprint]
+You are AgentDev1, a Software Engineer on [Sprint Name].
+
+[Framework docs to read...]
+
+Sprint: [Sprint Name]
+Jira Tickets: NEXUS-12345 (User authentication), NEXUS-12346 (RBAC)
+Your scope: Authentication and authorization backend
+
+Reference these tickets in your commits and PRs.
+Acknowledge and await your first task.
 ---
 
 **Pane 3: Create AgentDev2**
 Name: "[Sprint Name] - AgentDev2"
+Assigned tickets: NEXUS-12347
 Paste this prompt:
 ---
-[Full AgentDev2 prompt here, customized for this sprint]
+You are AgentDev2, a Software Engineer on [Sprint Name].
+
+[Framework docs to read...]
+
+Sprint: [Sprint Name]
+Jira Tickets: NEXUS-12347 (Permission management UI)
+Your scope: Permission management frontend
+
+Reference this ticket in your commits and PRs.
+Acknowledge and await your first task.
 ---
 
 ### Step 3: Create COE Window
@@ -306,26 +350,52 @@ Split into 3 panes
 Name: "[Sprint Name] - AgentSET"
 Paste this prompt:
 ---
-[Full AgentSET prompt here]
+You are AgentSET for [Sprint Name].
+
+[Framework docs to read...]
+
+Sprint Jira Tickets: NEXUS-12345, NEXUS-12346, NEXUS-12347, NEXUS-12348
+Your focus: Test coverage for all sprint tickets
+
+Reference Jira tickets when reporting test gaps or quality issues.
+Acknowledge and begin baseline assessment.
 ---
 
 **Pane 2: Create AgentSecurity**
 Name: "[Sprint Name] - AgentSecurity"
+Assigned ticket: NEXUS-12348
 Paste this prompt:
 ---
-[Full AgentSecurity prompt here]
+You are AgentSecurity for [Sprint Name].
+
+[Framework docs to read...]
+
+Sprint Jira Tickets: NEXUS-12345, NEXUS-12346, NEXUS-12347, NEXUS-12348
+Your ticket: NEXUS-12348 (Security audit and testing)
+
+Reference Jira tickets when reporting security findings.
+Acknowledge and begin security assessment.
 ---
 
 **Pane 3: Create AgentUX**
 Name: "[Sprint Name] - AgentUX"
 Paste this prompt:
 ---
-[Full AgentUX prompt here]
+You are AgentUX for [Sprint Name].
+
+[Framework docs to read...]
+
+Sprint Jira Tickets: NEXUS-12345, NEXUS-12346, NEXUS-12347
+Focus: UX review for permission management UI (NEXUS-12347)
+
+Reference Jira tickets when reporting UX feedback.
+Acknowledge and begin UX assessment.
 ---
 
 ### Step 4: Confirm Setup
 
 Once all agents acknowledge, tell me and I'll begin assigning work.
+Each agent knows their Jira ticket(s) and will reference them in commits/PRs.
 ```
 
 ### 5.5 Work Decomposition

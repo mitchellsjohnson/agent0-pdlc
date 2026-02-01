@@ -149,8 +149,8 @@ Agents do NOT communicate through:
 ### Before Release
 
 - [ ] AgentSET approves quality
-- [ ] AgentSecurity approves security (if applicable)
-- [ ] AgentUX approves experience (if applicable)
+- [ ] AgentSecurity approves security 
+- [ ] AgentUX approves experience 
 - [ ] Agent0 accepts work
 
 ---
