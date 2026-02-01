@@ -53,7 +53,19 @@ Agent0 PDLC is an open-source framework for orchestrating AI agent teams that wo
 
 ## 🚀 Quick Start
 
-### Step 1: Bootstrap Agent0 in Cursor
+Agent0 PDLC works with any AI coding assistant. Choose your preferred tool:
+
+| Tool | Best For |
+|------|----------|
+| **Cursor** | IDE-integrated experience, single agent or multi-tab |
+| **Claude (iTerm2)** | Multi-agent parallel sessions, terminal power users |
+| **GitHub Copilot** | Existing Copilot users, VS Code integration |
+| **Google Gemini** | Google Cloud users, Gemini models |
+| **ChatGPT** | Browser-based, quick experimentation |
+
+---
+
+### Option A: Cursor IDE
 
 1. **Open Cursor IDE** in your project
 2. **Open Agent Panel** (Cmd+L / Ctrl+L)
@@ -98,9 +110,11 @@ Begin with your Context assessment and Interview questions.
 
 5. **Agent0 will guide you** through creating your SQUAD and COE, providing exact prompts for each agent
 
-### Step 2: Bootstrap with Claude (iTerm2 Multi-Session)
+---
 
-See [workflows/CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) for detailed instructions on running Agent0 with multiple Claude sessions.
+### Option B: Claude CLI (iTerm2 Multi-Session)
+
+See [workflows/CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) for detailed instructions on running Agent0 with multiple Claude sessions in parallel.
 
 **SQUAD Window** - Agent0 + AgentDev instances working in parallel:
 
@@ -124,6 +138,22 @@ See [workflows/CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) for det
 │  └───────────┴───────────┘     │  └───────────┴───────────┘           │
 └─────────────────────────────────┴───────────────────────────────────────┘
 ```
+
+---
+
+### Option C: Other AI Coding Tools
+
+The Agent0 bootstrap prompt works with any AI assistant that can read files and execute commands:
+
+- **GitHub Copilot**: Use Copilot Chat in VS Code, paste the bootstrap prompt
+- **Google Gemini / AI Studio**: Paste prompt with file contents attached
+- **ChatGPT**: Use with Code Interpreter or paste relevant file contents
+- **Windsurf, Aider, Continue, etc.**: Same bootstrap prompt applies
+
+The key is providing the agent access to:
+1. The Agent0 PDLC documentation
+2. Your codebase
+3. The ability to read/write files and run commands
 
 ---
 
