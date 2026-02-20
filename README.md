@@ -396,7 +396,7 @@ The framework supports 16 specialized agents across 6 layers:
 | **Engineering** | SoftwareEngineer, SoftwareEngineerInTest, DevOpsEngineer | Build features, write tests, manage CI/CD |
 | **Security** | SecurityEngineer, SecurityResearcher | Scan vulnerabilities, research threats, enforce security |
 | **Data** | DataEngineer, DataAnalyst, DataScientist | Build pipelines, analyze data, create ML models |
-| **UX** | ProductDesigner, ProductDocumentation | Design UX, accessibility, create user documentation |
+| **UX** | UXAgent, ProductDocumentation | Design UX, accessibility, create user documentation |
 
 See [agents/README.md](agents/README.md) for the full agent directory.
 
@@ -488,7 +488,7 @@ See [agents/README.md](agents/README.md) for the complete agent directory with a
 - [SoftwareEngineer](agents/engineering/SOFTWARE-ENGINEER-AGENT.md) - Software Engineer
 - [SoftwareEngineerInTest](agents/engineering/SOFTWARE-ENGINEER-IN-TEST-AGENT.md) - Software Engineer in Test
 - [SecurityEngineer](agents/security/SECURITY-ENGINEER-AGENT.md) - Security Architect
-- [ProductDesigner](agents/ux/PRODUCT-DESIGNER-AGENT.md) - UX/Product Designer
+- [UXAgent](agents/ux/UX-AGENT.md) - UX Architect / Product Designer
 
 **Extended Team:**
 - [SegmentTechLead](agents/orchestration/SEGMENT-TECH-LEAD-AGENT.md) - Segment Coordinator

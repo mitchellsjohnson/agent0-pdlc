@@ -83,7 +83,7 @@
 - Scans completed: <list>
 - Accepted risks: <list>
 
-### ProductDesigner (UX)
+### UXAgent (UX)
 
 - Standards compliance: <status>
 - Deviations approved: <list>

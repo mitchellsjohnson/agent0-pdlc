@@ -260,7 +260,7 @@ Examples:
 ### UX Layer
 | Agent | Authority | Veto Power |
 |-------|-----------|------------|
-| ProductDesigner | UX/accessibility standards | Yes (UX) |
+| UXAgent | UX/accessibility standards | Yes (UX) |
 | ProductDocumentation | Documentation standards | No |
 
 ### Engineering Layer
@@ -290,7 +290,7 @@ Legacy agent names map to new names:
 - AgentDev → SoftwareEngineerAgent
 - AgentSET → SoftwareEngineerInTestAgent
 - AgentSecurity → SecurityEngineerAgent
-- AgentUX → ProductDesignerAgent
+- AgentUX → UXAgent
 
 ---
 

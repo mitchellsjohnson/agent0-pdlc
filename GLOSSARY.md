@@ -61,7 +61,7 @@ Owns positioning and launch. Manages go-to-market strategy, messaging, and launc
 
 ### UX Layer
 
-#### ProductDesigner
+#### UXAgent
 Owns UX, accessibility, and design systems. Ensures consistent user experience and WCAG compliance. *(Also known as AgentUX)*
 
 #### ProductDocumentation
@@ -201,5 +201,5 @@ Legacy agent names are still recognized and map to new standardized names:
 | AgentDev | SoftwareEngineerAgent | Engineering layer |
 | AgentSET | SoftwareEngineerInTestAgent | Engineering layer |
 | AgentSecurity | SecurityEngineerAgent | Security layer |
-| AgentUX | ProductDesignerAgent | Product layer, expanded scope |
+| AgentUX | UXAgent | UX layer |
 | UX | User Experience |

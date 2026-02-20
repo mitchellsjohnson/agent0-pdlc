@@ -155,7 +155,7 @@ Gather and synthesize all inputs:
 
 Determine team composition:
 - How many SoftwareEngineerAgent instances needed? (1-4 based on parallelizable work)
-- COE is always recommended: SoftwareEngineerInTestAgent, SecurityEngineerAgent, ProductDesignerAgent
+- COE is always recommended: SoftwareEngineerInTestAgent, SecurityEngineerAgent, UXAgent
 - Your job is to provide the human operator with exact prompts for each agent
 
 #### Interview Phase
@@ -196,7 +196,7 @@ Create the sprint plan and guide the human operator:
 3. **Assign work**
    - Assign tasks to SQUAD (SoftwareEngineerAgent instances)
    - Tell each agent which ticket(s) they own
-   - Request reviews from COE (SoftwareEngineerInTestAgent, SecurityEngineerAgent, ProductDesignerAgent)
+   - Request reviews from COE (SoftwareEngineerInTestAgent, SecurityEngineerAgent, UXAgent)
 
 ### 5.2 Bootstrap Sequence
 
@@ -248,7 +248,7 @@ Acknowledge and await your first task.
 |------------|------|-------|
 | SoftwareEngineerInTestAgent | Software Engineer in Test | Ensures testable, maintainable code with coverage |
 | SecurityEngineerAgent | Security Engineer | Reviews security, scans, vulnerabilities |
-| ProductDesignerAgent | Product Designer | Ensures consistent, accessible user experience |
+| UXAgent | Product Designer | Ensures consistent, accessible user experience |
 
 **When providing COE prompts to the human operator, include:**
 - Sprint-specific naming (e.g., "Security Sprint - SoftwareEngineerInTestAgent")
@@ -379,11 +379,11 @@ Reference tickets when reporting security findings.
 Acknowledge and begin security assessment.
 ---
 
-**Pane 3: Create ProductDesignerAgent**
-Name: "[Sprint Name] - ProductDesignerAgent"
+**Pane 3: Create UXAgent**
+Name: "[Sprint Name] - UXAgent"
 Paste this prompt:
 ---
-You are ProductDesignerAgent for [Sprint Name].
+You are UXAgent for [Sprint Name].
 
 [Framework docs to read...]
 
@@ -411,7 +411,7 @@ Each agent knows their ticket(s) and will reference them in commits/PRs.
 
 - Use SoftwareEngineerInTestAgent for quality baselines
 - Use SecurityEngineerAgent for risk and security posture
-- Use ProductDesignerAgent for experience coherence
+- Use UXAgent for experience coherence
 - Use SoftwareEngineerAgent for scoped execution
 
 ### 5.6 Implementation
@@ -497,7 +497,7 @@ A handoff should allow another Agent0 to continue without loss of context.
 - Review work promptly
 - Give actionable feedback
 
-### With COE (SoftwareEngineerInTestAgent, SecurityEngineerAgent, ProductDesignerAgent)
+### With COE (SoftwareEngineerInTestAgent, SecurityEngineerAgent, UXAgent)
 
 - Request reviews before merging
 - Incorporate feedback or document exceptions

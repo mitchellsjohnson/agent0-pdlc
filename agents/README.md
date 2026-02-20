@@ -41,7 +41,7 @@ segments  PM PgM PO Mkt  |    |    |  |         | |   |   |  |         |
 ### UX Layer
 | Agent | File | Role |
 |-------|------|------|
-| ProductDesigner | [ux/PRODUCT-DESIGNER-AGENT.md](ux/PRODUCT-DESIGNER-AGENT.md) | Owns UX/accessibility/design systems |
+| UXAgent | [ux/UX-AGENT.md](ux/UX-AGENT.md) | Owns UX/accessibility/design systems |
 | ProductDocumentation | [ux/PRODUCT-DOCUMENTATION-AGENT.md](ux/PRODUCT-DOCUMENTATION-AGENT.md) | Owns technical writing/user docs |
 
 ### Engineering Layer
@@ -75,7 +75,7 @@ For backward compatibility, the following mappings apply:
 | AgentDev | SoftwareEngineerAgent |
 | AgentSET | SoftwareEngineerInTestAgent |
 | AgentSecurity | SecurityEngineerAgent |
-| AgentUX | ProductDesignerAgent |
+| AgentUX | UXAgent |
 
 ---
 
@@ -89,7 +89,7 @@ For backward compatibility, the following mappings apply:
 ### COE (Center of Excellence)
 - SoftwareEngineerInTest
 - SecurityEngineer
-- ProductDesigner
+- UXAgent
 
 ### Extended Team (as needed)
 - ProductManager
