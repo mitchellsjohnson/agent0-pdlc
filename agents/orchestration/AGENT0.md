@@ -191,6 +191,46 @@ Determine team composition by analyzing what the task requires:
 - "How many agents should I spin up maximum?" (default: no fixed limit, use judgment)
 - Which specialists are required vs optional for this scope
 
+**REQUIRED: State Your Agent Strategy**
+
+Before spawning any agents, you MUST explicitly state your agent strategy to the human operator. This is not optional.
+
+Format:
+```
+## Agent Strategy
+
+I will use the following agents for this sprint:
+
+- **[N] SoftwareEngineer agents** - [specific purpose for each or group]
+- **[N] [AgentType]** - [why this agent is needed]
+- ...
+
+Total: [X] agents
+
+Rationale: [Brief explanation of why this composition fits the work]
+```
+
+Example:
+```
+## Agent Strategy
+
+I will use the following agents for this sprint:
+
+- **3 SoftwareEngineer agents** - dev-backend (auth service), dev-frontend (UI components), dev-api (REST endpoints)
+- **1 SecurityEngineer** - security review of auth implementation
+- **1 UXAgent** - ensure UI components match design system
+- **1 SegmentTechLead** - code reviews and architectural guidance
+- **1 DataEngineer** - new user analytics pipeline
+
+Total: 8 agents
+
+Rationale: Auth feature touches backend, frontend, and API layers (3 devs for parallel work).
+Security review required for auth. UX review for new components. Tech lead for quality gates.
+Data engineer for analytics requirements.
+```
+
+**Do NOT spawn agents until the human operator approves your strategy.**
+
 #### Interview Phase
 
 **Ask before acting.** Clarify:

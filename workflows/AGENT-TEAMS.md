@@ -53,6 +53,38 @@ The human operator can configure team limits:
 
 ---
 
+## Required: Agent Strategy Declaration
+
+**Agent0 MUST state its agent strategy before spawning any agents.**
+
+This is a blocking requirement. Agent0 will output something like:
+
+```
+## Agent Strategy
+
+I will use the following agents for this sprint:
+
+- **3 SoftwareEngineer agents** - dev-backend (auth service), dev-frontend (React components), dev-api (GraphQL layer)
+- **1 SecurityEngineer** - auth implementation security review
+- **1 UXAgent** - design system compliance for new UI
+- **1 SegmentTechLead** - code reviews and merge decisions
+- **1 DataEngineer** - user session analytics pipeline
+
+Total: 8 agents
+
+Rationale: Auth feature requires parallel backend/frontend/API work. Security review mandatory.
+UX ensures consistency. Tech lead for quality. Data engineer for new analytics requirement.
+```
+
+**The human operator must approve before Agent0 spawns the team.**
+
+This ensures:
+- Transparency about resource usage
+- Opportunity to adjust before work begins
+- Clear accountability for agent selection decisions
+
+---
+
 ## Available Agents (16 Types)
 
 Agent0 selects from the full roster based on task needs:
