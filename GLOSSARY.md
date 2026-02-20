@@ -37,17 +37,65 @@ Specialist agents that ensure quality across domains:
 
 ## Agent Types
 
-### AgentDev
-Software Engineer agent. Implements features, writes code, and follows Agent0's direction. Multiple instances can work in parallel.
+### Orchestration Layer
 
-### AgentSET
-Software Engineer in Test. Owns quality strategy, coverage requirements, and has authority to block releases on quality grounds.
+#### Agent0
+The orchestrating AI agent that serves as Product Owner and Technical Lead. Coordinates all other agents, plans sprints, assigns work, and manages quality.
 
-### AgentSecurity
-Security Architect. Reviews code for security issues, scans dependencies, and has release veto authority for security vulnerabilities.
+#### SegmentTechLead
+Intermediate coordinator for large organizations. Manages a segment/domain under Agent0's direction, coordinating segment-specific SQUAD and COE teams.
 
-### AgentUX
-UX Architect. Ensures design consistency, accessibility compliance, and testability standards.
+### Product Layer
+
+#### ProductManager
+Owns roadmap and prioritization. Defines what to build and why, manages product backlog, and coordinates with stakeholders.
+
+#### ProgramManager
+Owns cross-team delivery. Manages schedules, dependencies, and risk tracking across multiple teams and segments.
+
+#### ProductOperations
+Owns process, analytics, and release readiness. Manages release gates, metrics dashboards, and operational excellence.
+
+#### ProductMarketing
+Owns positioning and launch. Manages go-to-market strategy, messaging, and launch timing.
+
+### UX Layer
+
+#### ProductDesigner
+Owns UX, accessibility, and design systems. Ensures consistent user experience and WCAG compliance. *(Also known as AgentUX)*
+
+#### ProductDocumentation
+Owns technical writing and user documentation. Manages documentation standards, user guides, and API documentation.
+
+### Engineering Layer
+
+#### SoftwareEngineer
+Software Engineer agent. Implements features, writes code, and follows Agent0's direction. Multiple instances can work in parallel. *(Also known as AgentDev)*
+
+#### SoftwareEngineerInTest
+Software Engineer in Test. Owns quality strategy, coverage requirements, and has authority to block releases on quality grounds. *(Also known as AgentSET)*
+
+#### DevOpsEngineer
+Owns CI/CD and infrastructure. Manages pipelines, deployment strategies, and infrastructure as code.
+
+### Security Layer
+
+#### SecurityEngineer
+Security Architect. Reviews code for security issues, scans dependencies, and has release veto authority for security vulnerabilities. *(Also known as AgentSecurity)*
+
+#### SecurityResearcher
+Owns threat research. Monitors emerging threats, researches vulnerabilities, and provides threat intelligence to the team.
+
+### Data Layer
+
+#### DataEngineer
+Owns data pipelines. Builds and maintains ETL/ELT processes, data architecture, and data quality frameworks.
+
+#### DataAnalyst
+Owns analysis and reporting. Creates dashboards, performs data analysis, and delivers actionable insights.
+
+#### DataScientist
+Owns ML/AI models. Develops machine learning models, conducts experiments, and manages model deployment.
 
 ---
 
@@ -140,5 +188,18 @@ The authority of COE agents (SET, Security, UX) to block releases in their domai
 | RTL | React Testing Library |
 | SAST | Static Application Security Testing |
 | SET | Software Engineer in Test |
-| SQUAD | Agent0 + AgentDev team |
+| SQUAD | Agent0 + SoftwareEngineer team |
+
+---
+
+## Backward Compatibility
+
+Legacy agent names are still recognized and map to new standardized names:
+
+| Legacy Name | New Name | Notes |
+|-------------|----------|-------|
+| AgentDev | SoftwareEngineerAgent | Engineering layer |
+| AgentSET | SoftwareEngineerInTestAgent | Engineering layer |
+| AgentSecurity | SecurityEngineerAgent | Security layer |
+| AgentUX | ProductDesignerAgent | Product layer, expanded scope |
 | UX | User Experience |

@@ -19,10 +19,10 @@ Create a folder for each MCP server your organization uses:
 ```
 mcp/
 ├── README.md                    # This file
-├── sonatype-mcp/               # Sonatype tools
+├── sca-mcp/                    # SCA/dependency scanning tools
 │   ├── USAGE.md                # How agents use it
 │   └── tools.md                # Available tools
-├── jira-mcp/                   # Jira integration
+├── ticketing-mcp/              # Ticketing system integration
 │   └── USAGE.md
 └── github-mcp/                 # GitHub integration
     └── USAGE.md
@@ -38,7 +38,7 @@ For each MCP, document:
 
 ---
 
-## Example: Sonatype MCP
+## Example: SCA MCP
 
 ### Available Tools
 
@@ -53,7 +53,7 @@ For each MCP, document:
 ```
 AgentSecurity: Check if dependency is safe
 
-1. Call: mcp_sonatype-mcp_getComponentVersion
+1. Call: mcp_sca-mcp_getComponentVersion
    - coordinates: "pkg:maven/org.example/library@1.0.0"
 
 2. Check response:
@@ -62,7 +62,7 @@ AgentSecurity: Check if dependency is safe
    - If policy threat level < 4: Document and monitor
 
 3. For vulnerabilities found:
-   - Call: mcp_sonatype-mcp_getRecommendedComponentVersions
+   - Call: mcp_sca-mcp_getRecommendedComponentVersions
    - Propose upgrade path to Agent0
 ```
 
@@ -73,9 +73,9 @@ AgentSecurity: Check if dependency is safe
 | Agent | MCP Access |
 |-------|------------|
 | Agent0 | All MCPs (for coordination) |
-| AgentDev | GitHub, limited Sonatype |
+| AgentDev | GitHub, limited SCA |
 | AgentSET | Testing tools, coverage tools |
-| AgentSecurity | Sonatype, SAST tools |
+| AgentSecurity | SCA tools, SAST tools |
 | AgentUX | Design tools (if available) |
 
 ---

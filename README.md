@@ -25,27 +25,26 @@ Agent0 PDLC is an open-source framework for orchestrating AI agent teams that wo
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           AGENT0 PDLC FRAMEWORK                             │
+│                      (16 Specialized Agents, 6 Layers)                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  ORCHESTRATION      PRODUCT         ENGINEERING      SECURITY       UX     │
+│  ┌───────────┐   ┌──────────┐     ┌───────────┐   ┌──────────┐  ┌───────┐  │
+│  │  Agent0   │   │ PM / PgM │     │ Software  │   │ Security │  │Designer│  │
+│  │ (Leader)  │   │ ProdOps  │     │ Engineer  │   │ Engineer │  │ Docs  │  │
+│  │  Segment  │   │Marketing │     │ SET/DevOps│   │Researcher│  │       │  │
+│  │ TechLeads │   │          │     │           │   │          │  │       │  │
+│  └───────────┘   └──────────┘     └───────────┘   └──────────┘  └───────┘  │
 │                                                                             │
-│   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐                  │
-│   │   Agent0    │────▶│    SQUAD    │     │     COE     │                  │
-│   │  (Tech Lead)│     │  AgentDev1  │     │  AgentSET   │                  │
-│   │             │     │  AgentDev2  │     │  AgentSec   │                  │
-│   │  Orchestrate│     │  AgentDev3  │     │  AgentUX    │                  │
-│   │  Plan       │     │     ...     │     │             │                  │
-│   │  QA         │     └─────────────┘     └─────────────┘                  │
-│   └─────────────┘            │                   │                         │
-│          │                   │                   │                         │
-│          ▼                   ▼                   ▼                         │
-│   ┌─────────────────────────────────────────────────────────────────────┐  │
-│   │                         BEADS PROTOCOL                              │  │
-│   │              Machine-readable task tracking & coordination          │  │
-│   └─────────────────────────────────────────────────────────────────────┘  │
-│                                    │                                        │
-│                                    ▼                                        │
-│   ┌─────────────────────────────────────────────────────────────────────┐  │
-│   │                        YOUR CODEBASE                                │  │
-│   │                 Delivered, Tested, Secure, Beautiful                │  │
-│   └─────────────────────────────────────────────────────────────────────┘  │
+│                              DATA LAYER                                     │
+│              ┌──────────────────────────────────────────┐                  │
+│              │  DataEngineer  DataAnalyst  DataScientist │                  │
+│              └──────────────────────────────────────────┘                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                         BEADS PROTOCOL                                      │
+│              Machine-readable task tracking & coordination                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                        YOUR CODEBASE                                        │
+│                 Delivered, Tested, Secure, Beautiful                        │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -83,7 +82,7 @@ git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
 
 **Organization-Level Config (Optional)**
 
-If your organization has a shared config repo (e.g., `agent0-pdlc-sonatype`), clone it too:
+If your organization has a shared config repo (e.g., `agent0-pdlc-yourorg`), clone it too:
 ```bash
 git clone https://github.com/yourorg/agent0-pdlc-yourorg.git agent0-pdlc-yourorg
 ```
@@ -109,12 +108,12 @@ FIRST: Check if the framework exists in this workspace:
 - If missing, tell me to run: git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
 
 FRAMEWORK (read if exists):
-1. agent0-pdlc/agents/AGENT0.md - Your operating manual
+1. agent0-pdlc/agents/orchestration/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
 
 ORGANIZATION (check if exists):
-- Look for agent0-pdlc-*/ folders (e.g., agent0-pdlc-sonatype)
+- Look for agent0-pdlc-*/ folders (e.g., agent0-pdlc-yourorg)
 - If found, read ORGANIZATION-RULES.md and policies/
 
 We are starting a NEW APPLICATION from scratch.
@@ -154,7 +153,7 @@ Begin by checking for the framework, then ask your Interview questions.
 This shows Agent0 orchestrating a sprint with:
 - **Agent0**: Leading the sprint, coordinating all agents
 - **AgentDev1**: Fixing Jest ESM issues
-- **AgentSecurity**: Scanning dependencies via sonatype-mcp
+- **AgentSecurity**: Scanning dependencies via SCA tool
 - **AgentUX**: Reviewing CLI output
 - **AgentSET**: Reviewing tests after Dev1 completes
 - **19 files created/modified** in parallel execution
@@ -178,7 +177,7 @@ If agent0-pdlc/ is missing, tell me to run:
 git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
 
 FRAMEWORK (read in order of precedence: app > org > generic):
-1. agent0-pdlc/agents/AGENT0.md - Your operating manual
+1. agent0-pdlc/agents/orchestration/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
 4. agent0-pdlc-<org>/ORGANIZATION-RULES.md - Org policies (if exists)
@@ -195,18 +194,18 @@ ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE
 
 INTERVIEW: Before planning, ask me:
 - Sprint name and goals
-- Jira ticket numbers in scope (e.g., PROJ-123, PROJ-124, PROJ-125)
+- Ticket numbers in scope (e.g., TICKET-123, TICKET-124, TICKET-125)
 - Requirements (mockups, PRDs, user stories)
 - Constraints (time, scope, dependencies)
 - Definition of done
 
 TASK: After I answer:
-1. Create a sprint plan with tasks in Beads, linked to Jira tickets
+1. Create a sprint plan with tasks in Beads, linked to tickets
 2. Determine how many AgentDev instances needed (1-4 based on parallelizable work)
 3. Provide me exact instructions to spin up each agent:
    - What to name each agent (e.g., "<Sprint Name> - AgentDev1")
    - The exact prompt to paste for each agent
-   - Which Jira ticket(s) each agent owns
+   - Which ticket(s) each agent owns
    - Which window/tab to create them in (SQUAD vs COE)
 
 You are the orchestrator. Guide me step by step.
@@ -291,8 +290,8 @@ Agent0 PDLC uses a three-tier inheritance model that allows customization at eac
 │  - Approved tech stack                                                      │
 │  - Organization-wide AI skills                                              │
 │  - MCP tools, security tools, build tools                                   │
-│  - Ticketing integrations (Jira, Linear, etc.)                              │
-│  Example: agent0-pdlc-sonatype/ (Sonatype's internal policies)              │
+│  - Ticketing integrations (ticketing system, etc.)                          │
+│  Example: agent0-pdlc-yourorg/ (your organization's internal policies)      │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼ Each app extends org
@@ -304,7 +303,7 @@ Agent0 PDLC uses a three-tier inheritance model that allows customization at eac
 │  - App-specific security strategy                                           │
 │  - App-specific UX strategy                                                 │
 │  - Codebase-specific skills                                                 │
-│  Example: agent0-pdlc-nexus-internal/ (Nexus Repository config)             │
+│  Example: agent0-pdlc-yourapp/ (your application config)                    │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -388,13 +387,18 @@ When working with your AI agent, ensure it has access to:
 
 ### Agents
 
-| Agent | Role | Responsibility |
-|-------|------|----------------|
-| **Agent0** | Tech Lead / Orchestrator | Plans sprints, assigns work, QAs output, manages handoffs |
-| **AgentDev** | Software Engineer | Implements features, fixes bugs, writes code |
-| **AgentSET** | Software Engineer in Test | Defines test strategy, ensures quality, blocks on failures |
-| **AgentSecurity** | Security Architect | Reviews security, scans dependencies, has release veto |
-| **AgentUX** | UX Architect | Enforces design standards, ensures consistency |
+The framework supports 16 specialized agents across 6 layers:
+
+| Layer | Agents | Responsibility |
+|-------|--------|----------------|
+| **Orchestration** | Agent0, SegmentTechLead | Coordinate teams, plan sprints, manage delivery |
+| **Product** | ProductManager, ProgramManager, ProductOps, ProductMarketing | Define what to build, manage releases, go-to-market |
+| **Engineering** | SoftwareEngineer, SoftwareEngineerInTest, DevOpsEngineer | Build features, write tests, manage CI/CD |
+| **Security** | SecurityEngineer, SecurityResearcher | Scan vulnerabilities, research threats, enforce security |
+| **Data** | DataEngineer, DataAnalyst, DataScientist | Build pipelines, analyze data, create ML models |
+| **UX** | ProductDesigner, ProductDocumentation | Design UX, accessibility, create user documentation |
+
+See [agents/README.md](agents/README.md) for the full agent directory.
 
 ### Beads Protocol
 
@@ -439,7 +443,7 @@ Agent0 accepts requirements from **any source**. Use whatever tools your team al
 | **Documentation** | Google Docs, Notion, Confluence |
 | **AI Chat** | ChatGPT, Claude, Gemini conversations |
 | **Traditional** | PRDs, user stories, BDD specs |
-| **Ticketing** | Jira tickets, GitHub Issues, Linear |
+| **Ticketing** | Tickets, GitHub Issues, Linear |
 
 ### The CRIT Framework
 
@@ -477,11 +481,21 @@ Agent0 uses the **CRIT Framework** to process your requirements:
 
 ### Agent Operating Manuals
 
-- [AGENT0.md](agents/AGENT0.md) - Product Owner / Technical Lead
-- [AGENTDEV.md](agents/AGENTDEV.md) - Software Engineer
-- [AGENTSET.md](agents/AGENTSET.md) - Software Engineer in Test
-- [AGENTSECURITY.md](agents/AGENTSECURITY.md) - Security Architect
-- [AGENTUX.md](agents/AGENTUX.md) - UX Architect
+See [agents/README.md](agents/README.md) for the complete agent directory with all 16 agents.
+
+**Core Agents:**
+- [Agent0](agents/orchestration/AGENT0.md) - Product Owner / Technical Lead
+- [SoftwareEngineer](agents/engineering/SOFTWARE-ENGINEER-AGENT.md) - Software Engineer
+- [SoftwareEngineerInTest](agents/engineering/SOFTWARE-ENGINEER-IN-TEST-AGENT.md) - Software Engineer in Test
+- [SecurityEngineer](agents/security/SECURITY-ENGINEER-AGENT.md) - Security Architect
+- [ProductDesigner](agents/ux/PRODUCT-DESIGNER-AGENT.md) - UX/Product Designer
+
+**Extended Team:**
+- [SegmentTechLead](agents/orchestration/SEGMENT-TECH-LEAD-AGENT.md) - Segment Coordinator
+- [DevOpsEngineer](agents/engineering/DEVOPS-ENGINEER-AGENT.md) - CI/CD & Infrastructure
+- [ProductManager](agents/product/PRODUCT-MANAGER-AGENT.md) - Roadmap & Prioritization
+- [DataEngineer](agents/data/DATA-ENGINEER-AGENT.md) - Data Pipelines
+- [And 6 more...](agents/README.md)
 
 ### Workflows
 

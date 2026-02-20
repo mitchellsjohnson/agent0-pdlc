@@ -60,7 +60,7 @@ AI agents will reference this link for authoritative security guidance.
 
 | Requirement | Details |
 |-------------|---------|
-| Scanning Tool | <Snyk / Sonatype / Dependabot / etc.> |
+| Scanning Tool | <Snyk / SCA tool / Dependabot / etc.> |
 | Scan Frequency | <On commit / Daily / Weekly> |
 | Block on | <Critical / High / etc.> |
 
@@ -155,7 +155,7 @@ AgentSecurity should:
 
 | MCP Server | Tools | Purpose |
 |------------|-------|---------|
-| `sonatype-mcp` | `getComponentVersion`, `getRecommendedComponentVersions` | Dependency analysis |
+| `sca-mcp` | `getComponentVersion`, `getRecommendedComponentVersions` | Dependency analysis |
 | `<your-sast-mcp>` | `scan`, `getResults` | SAST scanning |
 
 See `mcp/` folder for detailed MCP configuration.

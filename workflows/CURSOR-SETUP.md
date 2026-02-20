@@ -48,7 +48,7 @@ Add to `.cursor/settings.json`:
 {
   "cursor.agent.defaultModel": "claude-sonnet-4",
   "cursor.agent.contextFiles": [
-    "agent0-pdlc/agents/AGENT0.md",
+    "agent0-pdlc/agents/orchestration/AGENT0.md",
     "agent0-pdlc/GLOBAL-RULES.md",
     "agent0-pdlc/workflows/BEADS-PROTOCOL.md"
   ]
@@ -77,7 +77,7 @@ Choose your preferred model:
 You are Agent0, the Product Owner and Technical Lead for this project.
 
 Read and internalize these documents in order:
-1. agent0-pdlc/agents/AGENT0.md - Your operating manual
+1. agent0-pdlc/agents/orchestration/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Communication protocol
 4. agent0-pdlc-org/ORGANIZATION-RULES.md - Organization policies
@@ -132,7 +132,7 @@ Open multiple agent panels for parallel work:
 You are AgentDev1, a Software Engineer on this project.
 
 Read and internalize:
-1. agent0-pdlc/agents/AGENTDEV.md - Your operating manual
+1. agent0-pdlc/agents/engineering/SOFTWARE-ENGINEER-AGENT.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc-org/ORGANIZATION-RULES.md - Org policies
 4. agent0-pdlc-<app>/BUILD-INSTRUCTIONS.md - How to build
@@ -148,7 +148,7 @@ Acknowledge and await your first task from Agent0.
 You are AgentSET, the Software Engineer in Test for this project.
 
 Read and internalize:
-1. agent0-pdlc/agents/AGENTSET.md - Your operating manual
+1. agent0-pdlc/agents/engineering/SOFTWARE-ENGINEER-IN-TEST-AGENT.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc-org/policies/TESTING-POLICY.md - Org testing policy
 4. agent0-pdlc-<app>/TESTING-STRATEGY.md - App testing strategy
@@ -164,7 +164,7 @@ Acknowledge and report your baseline assessment.
 You are AgentSecurity, the Security Architect for this project.
 
 Read and internalize:
-1. agent0-pdlc/agents/AGENTSECURITY.md - Your operating manual
+1. agent0-pdlc/agents/security/SECURITY-ENGINEER-AGENT.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc-org/policies/SECURITY-POLICY.md - Org security policy
 4. agent0-pdlc-<app>/SECURITY-STRATEGY.md - App security strategy
@@ -180,7 +180,7 @@ Acknowledge and report your baseline security assessment.
 You are AgentUX, the UX Architect for this project.
 
 Read and internalize:
-1. agent0-pdlc/agents/AGENTUX.md - Your operating manual
+1. agent0-pdlc/agents/ux/PRODUCT-DESIGNER-AGENT.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc-org/policies/UX-STANDARDS.md - Org UX standards
 4. agent0-pdlc-<app>/UX-STRATEGY.md - App UX strategy
@@ -294,7 +294,7 @@ Read HANDOFF.md and Beads to understand current state.
 
 Ensure all three tiers are accessible:
 ```bash
-ls agent0-pdlc/agents/AGENT0.md
+ls agent0-pdlc/agents/orchestration/AGENT0.md
 ls agent0-pdlc-org/ORGANIZATION-RULES.md
 ls agent0-pdlc-<app>/BUILD-INSTRUCTIONS.md
 ```
@@ -311,7 +311,7 @@ You MUST follow these rules. Acknowledge each rule.
 
 ```
 Your context may have been lost. Please re-read:
-1. agent0-pdlc/agents/AGENT0.md
+1. agent0-pdlc/agents/orchestration/AGENT0.md
 2. HANDOFF.md
 3. yarn bd:list
 

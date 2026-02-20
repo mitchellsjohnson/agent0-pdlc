@@ -135,12 +135,12 @@ See `policies/TESTING-POLICY.md` for the full testing policy.
 
 | Setting | Value |
 |---------|-------|
-| System | <Jira / GitHub Issues / Linear / etc.> |
+| System | <Ticketing system / GitHub Issues / Linear / etc.> |
 | Project Format | <Project key format> |
 | Required Fields | <List required fields> |
 
 Example:
-- System: Jira
+- System: Your ticketing system
 - Project: All projects use format `<TEAM>-<NUMBER>`
 - Required: Priority, Component, Sprint
 

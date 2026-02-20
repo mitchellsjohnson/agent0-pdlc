@@ -63,30 +63,49 @@
 
 | Agent | Last Task | Status |
 |-------|-----------|--------|
-| AgentDev1 | <task> | <completed/in-progress> |
-| AgentDev2 | <task> | <completed/in-progress> |
+| SoftwareEngineer1 | <task> | <completed/in-progress> |
+| SoftwareEngineer2 | <task> | <completed/in-progress> |
+| DevOpsEngineer | <task> | <completed/in-progress> |
 
 ---
 
 ## 6. COE Status
 
-### AgentSET (Testing)
+### SoftwareEngineerInTest (Testing)
 
 - Test coverage: <before>% → <after>%
 - Tests passing: <count>
 - Known gaps: <list>
 
-### AgentSecurity (Security)
+### SecurityEngineer (Security)
 
 - Vulnerabilities: <before> → <after>
 - Scans completed: <list>
 - Accepted risks: <list>
 
-### AgentUX (UX)
+### ProductDesigner (UX)
 
 - Standards compliance: <status>
 - Deviations approved: <list>
 - Known gaps: <list>
+
+---
+
+## 6b. Extended Team Status (if applicable)
+
+### Product Team
+| Agent | Status | Notes |
+|-------|--------|-------|
+| ProductManager | <active/inactive> | <notes> |
+| ProgramManager | <active/inactive> | <notes> |
+| ProductOperations | <active/inactive> | <notes> |
+
+### Data Team
+| Agent | Status | Notes |
+|-------|--------|-------|
+| DataEngineer | <active/inactive> | <notes> |
+| DataAnalyst | <active/inactive> | <notes> |
+| DataScientist | <active/inactive> | <notes> |
 
 ---
 

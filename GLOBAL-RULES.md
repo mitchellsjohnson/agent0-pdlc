@@ -75,6 +75,32 @@ When rules conflict, higher precedence wins:
 
 ## Data Protection (Non-Negotiable)
 
+### 🚫 ABSOLUTE PROHIBITION: Database Deletion
+
+**THE FOLLOWING ARE FORBIDDEN unless the human explicitly says "delete the database":**
+
+```bash
+# FORBIDDEN commands (examples):
+rm -rf target                    # May contain database
+rm -rf */target                  # May contain database
+mvn clean                        # Deletes target directories
+./mvnw clean                     # Deletes target directories
+```
+
+**Database locations to NEVER delete:**
+- `target/application-data/` - Contains database files
+- `*/db/*.mv.db` - H2 database files
+- Any path containing `application-data`, `db/`, or `.mv.db`
+
+**WHY:** Deleting databases destroys ALL user data, repositories, configurations, and test state. This has caused repeated catastrophic data loss.
+
+**SAFE alternatives:**
+- Delete specific subdirectories (not the whole target)
+- Use `mvn package` without `clean`
+- Delete only build artifacts, preserve `application-data`
+
+### General Data Protection
+
 **NEVER delete data directories without explicit human confirmation:**
 - Database files
 - Blob storage
@@ -203,8 +229,8 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 ```
 
 Examples:
-- `feat/PROJ-123-add-user-auth`
-- `fix/PROJ-456-fix-login-redirect`
+- `feat/TICKET-123-add-user-auth`
+- `fix/TICKET-456-fix-login-redirect`
 
 ### Never
 
@@ -217,15 +243,54 @@ Examples:
 
 ## Agent Authority (Non-Negotiable)
 
+### Orchestration Layer
 | Agent | Authority | Veto Power |
 |-------|-----------|------------|
 | Agent0 | All scope/arch decisions | No (escalates) |
-| AgentDev | Implementation details | No |
-| AgentSET | Quality standards | Yes (quality) |
-| AgentSecurity | Security standards | Yes (security) |
-| AgentUX | UX standards | Yes (UX) |
+| SegmentTechLead | Segment scope/arch decisions | No (escalates to Agent0) |
 
-**COE vetoes must be respected or escalated. Never overridden.**
+### Product Layer
+| Agent | Authority | Veto Power |
+|-------|-----------|------------|
+| ProductManager | Roadmap/prioritization | No |
+| ProgramManager | Cross-team delivery schedules | No |
+| ProductOperations | Release readiness | Yes (release gates) |
+| ProductMarketing | Go-to-market timing | No |
+
+### UX Layer
+| Agent | Authority | Veto Power |
+|-------|-----------|------------|
+| ProductDesigner | UX/accessibility standards | Yes (UX) |
+| ProductDocumentation | Documentation standards | No |
+
+### Engineering Layer
+| Agent | Authority | Veto Power |
+|-------|-----------|------------|
+| SoftwareEngineer | Implementation details | No |
+| SoftwareEngineerInTest | Quality standards | Yes (quality) |
+| DevOpsEngineer | CI/CD/infrastructure | Yes (deployment) |
+
+### Security Layer
+| Agent | Authority | Veto Power |
+|-------|-----------|------------|
+| SecurityEngineer | Security standards | Yes (security) |
+| SecurityResearcher | Threat assessment | No (advisory) |
+
+### Data Layer
+| Agent | Authority | Veto Power |
+|-------|-----------|------------|
+| DataEngineer | Data architecture | No |
+| DataAnalyst | Analysis methodology | No |
+| DataScientist | ML/AI model decisions | No |
+
+**Vetoes must be respected or escalated. Never overridden.**
+
+### Backward Compatibility
+Legacy agent names map to new names:
+- AgentDev → SoftwareEngineerAgent
+- AgentSET → SoftwareEngineerInTestAgent
+- AgentSecurity → SecurityEngineerAgent
+- AgentUX → ProductDesignerAgent
 
 ---
 

@@ -67,8 +67,8 @@ agent0-pdlc-<your-org>/
 │   └── TECH-STACK.md             # Approved technologies
 │
 ├── integrations/                 # Tool integrations
-│   ├── JIRA-INTEGRATION.md       # Jira project setup, workflows
-│   ├── LIFECYCLE-INTEGRATION.md  # SCA scanning (Sonatype Lifecycle, etc.)
+│   ├── TICKETING-INTEGRATION.md  # Ticketing system setup, workflows
+│   ├── LIFECYCLE-INTEGRATION.md  # SCA scanning (dependency scanner, etc.)
 │   ├── SAST-INTEGRATION.md       # SAST tool configuration
 │   └── SOURCE-CONTROL.md         # Git standards, branch policies
 │
@@ -84,7 +84,7 @@ agent0-pdlc-<your-org>/
 │   ├── README.md                 # How to add skills
 │   ├── lifecycle-scan.md         # Skill: Run SCA scans
 │   ├── sast-scan.md              # Skill: Run SAST scans
-│   └── jira-workflow.md          # Skill: Create/update Jira tickets
+│   └── ticketing-workflow.md     # Skill: Create/update tickets
 │
 └── resources/                    # Shared resources
     ├── personas/                 # User personas (if defined)
