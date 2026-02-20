@@ -168,10 +168,28 @@ Gather and synthesize all inputs:
 
 #### Role Phase
 
-Determine team composition:
-- How many SoftwareEngineerAgent instances needed? (1-4 based on parallelizable work)
-- COE is always recommended: SoftwareEngineerInTestAgent, SecurityEngineerAgent, UXAgent
-- Your job is to provide the human operator with exact prompts for each agent
+Determine team composition by analyzing what the task requires:
+
+**Available Agent Types (select as needed):**
+
+| Layer | Agent Types | Use When |
+|-------|-------------|----------|
+| Orchestration | SegmentTechLead | Large initiatives need sub-coordinators |
+| Product | ProductManager, ProgramManager, ProductOperations, ProductMarketing | Strategic planning, launch, cross-team coordination |
+| Engineering | SoftwareEngineer, SoftwareEngineerInTest, DevOpsEngineer | Implementation, quality, CI/CD |
+| Security | SecurityEngineer, SecurityResearcher | Security review, threat research |
+| Data | DataEngineer, DataAnalyst, DataScientist | Pipelines, analytics, ML/AI |
+| UX | UXAgent, ProductDocumentation | Design, accessibility, docs |
+
+**Agent Selection Principles:**
+- Match agents to actual task needs (don't spawn agents you won't use)
+- The human operator sets `max_agents` - respect this limit
+- Combine roles when work is small (one agent can wear multiple hats)
+- Scale up when work is parallelizable across specialists
+
+**Ask the human operator:**
+- "How many agents should I spin up maximum?" (default: no fixed limit, use judgment)
+- Which specialists are required vs optional for this scope
 
 #### Interview Phase
 
@@ -241,9 +259,11 @@ TeamCreate:
   description: "Authentication feature sprint"
 ```
 
-#### Step 2: Spawn SQUAD Teammates
+#### Step 2: Spawn Teammates (Dynamic Selection)
 
-Use the `Task` tool with `team_name` to spawn SoftwareEngineerAgent teammates:
+Use the `Task` tool with `team_name` to spawn the agents the task requires.
+
+**Agent0 selects agent types based on task analysis:**
 
 ```
 Task:
@@ -263,17 +283,28 @@ Task:
     completed when done. Send messages to team-lead when blocked or finished.
 ```
 
-Spawn multiple teammates in parallel for parallelizable work:
+**Scaling Guidelines (operator-configurable):**
 
-| Codebase Size | Parallelizable Work | Recommended Teammates |
-|---------------|---------------------|----------------------|
-| Small (<10K LOC) | Low | 1 SoftwareEngineerAgent |
-| Medium (10-100K) | Medium | 2 SoftwareEngineerAgent |
-| Large (>100K) | High | 3-4 SoftwareEngineerAgent |
+The human operator may set a `max_agents` limit. Within that limit, scale based on:
 
-#### Step 3: Spawn COE Teammates
+| Factor | Scale Up | Scale Down |
+|--------|----------|------------|
+| Parallelizable work | Independent modules/features | Sequential dependencies |
+| Specialist needs | Multiple domains (security + data + UX) | Single domain focus |
+| Deadline pressure | More hands, more speed | Coordination overhead not worth it |
+| Codebase complexity | Large, unfamiliar code | Small, well-understood code |
 
-**COE is always recommended.** Spawn specialist teammates for quality gates:
+**If no limit specified:** Use your judgment. Start lean, add agents when blocked or when parallel work emerges.
+
+**Example: Full-stack feature might need:**
+- 2 SoftwareEngineer (frontend + backend)
+- 1 DataEngineer (new data pipeline)
+- 1 SecurityEngineer (auth review)
+- 1 UXAgent (design consistency)
+
+#### Step 3: Spawn Specialist Teammates
+
+**Spawn specialists based on what the task requires.** Common quality gates:
 
 ```
 Task:
@@ -281,7 +312,7 @@ Task:
   subagent_type: "general-purpose"
   name: "tester"
   team_name: "sprint-auth-feature"
-  mode: "plan"  # Require plan approval for COE
+  mode: "plan"  # Require plan approval for specialists
   prompt: |
     You are SoftwareEngineerInTestAgent on the auth-feature sprint team.
 
@@ -294,11 +325,28 @@ Task:
     Then: Review SQUAD work as tasks complete.
 ```
 
-| COE Specialist | Purpose |
-|----------------|---------|
-| SoftwareEngineerInTestAgent | Quality, coverage, test strategy |
-| SecurityEngineerAgent | Security review, dependency scans |
-| UXAgent | UX consistency, accessibility |
+**Available Specialists (spawn as needed):**
+
+| Specialist | When to Spawn |
+|------------|---------------|
+| SoftwareEngineerInTest | Any code changes - quality gates |
+| SecurityEngineer | Auth, data handling, dependencies |
+| SecurityResearcher | Threat modeling, vulnerability research |
+| UXAgent | UI changes, accessibility requirements |
+| ProductDocumentation | API docs, user guides needed |
+| DataEngineer | Pipeline changes, migrations |
+| DataAnalyst | Analytics, reporting features |
+| DataScientist | ML models, AI features |
+| DevOpsEngineer | CI/CD, infrastructure changes |
+| ProductManager | Scope questions, prioritization |
+| ProgramManager | Cross-team dependencies |
+| ProductOperations | Release readiness, process |
+| ProductMarketing | Launch, positioning |
+
+**Agent0 decides which specialists based on:**
+- What domains does the work touch?
+- What review gates are required?
+- What expertise gaps exist on the team?
 
 #### Step 4: Create Shared Tasks
 

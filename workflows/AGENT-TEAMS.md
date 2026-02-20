@@ -15,21 +15,56 @@ Agent0 PDLC uses the **Gastown Pattern** for multi-agent orchestration. Agent0 a
 │                           │   (Mayor)   │                                   │
 │                           └──────┬──────┘                                   │
 │                                  │                                           │
-│              ┌───────────────────┼───────────────────┐                      │
-│              │                   │                   │                      │
-│              ▼                   ▼                   ▼                      │
-│    ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐             │
-│    │      SQUAD      │ │       COE       │ │     BEADS       │             │
-│    │  (City Workers) │ │  (Specialists)  │ │ (Written Record)│             │
-│    │                 │ │                 │ │                 │             │
-│    │ SoftwareEng 1-4 │ │ SET, Security   │ │ Persistent task │             │
-│    │ DevOps          │ │ UX              │ │ tracking        │             │
-│    └─────────────────┘ └─────────────────┘ └─────────────────┘             │
+│        Agent0 dynamically spawns agents based on task needs                 │
+│        (Human operator sets optional max_agents limit)                      │
+│                                  │                                           │
+│    ┌─────────────────────────────┼─────────────────────────────┐           │
+│    │              │              │              │              │            │
+│    ▼              ▼              ▼              ▼              ▼            │
+│ ┌──────┐    ┌──────────┐   ┌──────────┐   ┌────────┐    ┌─────────┐       │
+│ │ Eng  │    │ Product  │   │ Security │   │  Data  │    │   UX    │       │
+│ │      │    │          │   │          │   │        │    │         │       │
+│ │ SWE  │    │ PM, PgM  │   │ SecEng   │   │ DE, DA │    │ UXAgent │       │
+│ │ SET  │    │ PO, PMkt │   │ SecRes   │   │ DS     │    │ ProdDoc │       │
+│ │DevOps│    │          │   │          │   │        │    │         │       │
+│ └──────┘    └──────────┘   └──────────┘   └────────┘    └─────────┘       │
 │                                                                             │
+│    BEADS: Persistent task record (bd create, bd update, bd sync)            │
 │    Agent Teams: Real-time coordination (SendMessage)                        │
-│    Beads: Durable task record (bd create, bd update, bd sync)               │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+**Agent0 picks from 16 agent types based on what the task requires.**
+
+---
+
+## Operator Configuration
+
+The human operator can configure team limits:
+
+```
+# Example: Tell Agent0 your constraints
+"You may spawn up to 6 agents maximum for this sprint."
+"Focus on engineering agents only - no product or marketing."
+"Use minimal agents - I want to keep costs low."
+```
+
+**If no limit specified:** Agent0 uses judgment, starting lean and scaling as needed.
+
+---
+
+## Available Agents (16 Types)
+
+Agent0 selects from the full roster based on task needs:
+
+| Layer | Agents | Use For |
+|-------|--------|---------|
+| **Orchestration** | Agent0, SegmentTechLead | Coordination, sub-team leads |
+| **Product** | ProductManager, ProgramManager, ProductOperations, ProductMarketing | Strategy, planning, launch |
+| **Engineering** | SoftwareEngineer, SoftwareEngineerInTest, DevOpsEngineer | Code, quality, CI/CD |
+| **Security** | SecurityEngineer, SecurityResearcher | Reviews, threat research |
+| **Data** | DataEngineer, DataAnalyst, DataScientist | Pipelines, analytics, ML |
+| **UX** | UXAgent, ProductDocumentation | Design, docs |
 
 ---
 
