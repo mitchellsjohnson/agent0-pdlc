@@ -15,26 +15,28 @@ Agent0 PDLC uses the **Gastown Pattern** for multi-agent orchestration. Agent0 a
 │                           │   (Mayor)   │                                   │
 │                           └──────┬──────┘                                   │
 │                                  │                                           │
-│        Agent0 dynamically spawns agents based on task needs                 │
-│        (Human operator sets optional max_agents limit)                      │
-│                                  │                                           │
-│    ┌─────────────────────────────┼─────────────────────────────┐           │
-│    │              │              │              │              │            │
-│    ▼              ▼              ▼              ▼              ▼            │
-│ ┌──────┐    ┌──────────┐   ┌──────────┐   ┌────────┐    ┌─────────┐       │
-│ │ Eng  │    │ Product  │   │ Security │   │  Data  │    │   UX    │       │
-│ │      │    │          │   │          │   │        │    │         │       │
-│ │ SWE  │    │ PM, PgM  │   │ SecEng   │   │ DE, DA │    │ UXAgent │       │
-│ │ SET  │    │ PO, PMkt │   │ SecRes   │   │ DS     │    │ ProdDoc │       │
-│ │DevOps│    │          │   │          │   │        │    │         │       │
-│ └──────┘    └──────────┘   └──────────┘   └────────┘    └─────────┘       │
+│              ┌───────────────────┴───────────────────┐                      │
+│              │                                       │                      │
+│              ▼                                       ▼                      │
+│    ┌───────────────────────────┐      ┌────────────────────────────────┐   │
+│    │     CORE COE (Always)     │      │    EXTENDED TEAM (As Needed)   │   │
+│    │     Quality Gates         │      │    Task-Specific Agents        │   │
+│    │                           │      │                                │   │
+│    │  • SecurityEngineer       │      │  • SoftwareEngineer (1-N)      │   │
+│    │  • UXAgent                │      │  • SegmentTechLead             │   │
+│    │  • SoftwareEngineerInTest │      │  • DevOpsEngineer              │   │
+│    │                           │      │  • DataEngineer/Analyst/Sci    │   │
+│    │  (Release veto authority) │      │  • Product team agents         │   │
+│    └───────────────────────────┘      │  • SecurityResearcher          │   │
+│                                       │  • ProductDocumentation        │   │
+│                                       └────────────────────────────────┘   │
 │                                                                             │
 │    BEADS: Persistent task record (bd create, bd update, bd sync)            │
 │    Agent Teams: Real-time coordination (SendMessage)                        │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Agent0 picks from 16 agent types based on what the task requires.**
+**Core COE is always spawned (unless operator opts out). Extended team based on task needs.**
 
 ---
 
@@ -62,18 +64,20 @@ This is a blocking requirement. Agent0 will output something like:
 ```
 ## Agent Strategy
 
-I will use the following agents for this sprint:
-
-- **3 SoftwareEngineer agents** - dev-backend (auth service), dev-frontend (React components), dev-api (GraphQL layer)
-- **1 SecurityEngineer** - auth implementation security review
+### Core COE (Quality Gates)
+- **1 SecurityEngineer** - auth security review, dependency scan
 - **1 UXAgent** - design system compliance for new UI
+- **1 SoftwareEngineerInTest** - test coverage, integration tests
+
+### Extended Team (Task-Specific)
+- **3 SoftwareEngineer agents** - dev-backend (auth service), dev-frontend (React), dev-api (GraphQL)
 - **1 SegmentTechLead** - code reviews and merge decisions
 - **1 DataEngineer** - user session analytics pipeline
 
-Total: 8 agents
+Total: 8 agents (3 Core COE + 5 Extended)
 
-Rationale: Auth feature requires parallel backend/frontend/API work. Security review mandatory.
-UX ensures consistency. Tech lead for quality. Data engineer for new analytics requirement.
+Rationale: Core COE for quality gates. Auth needs parallel backend/frontend/API work.
+Tech lead for code review. Data engineer for analytics requirement.
 ```
 
 **The human operator must approve before Agent0 spawns the team.**
@@ -85,18 +89,30 @@ This ensures:
 
 ---
 
-## Available Agents (16 Types)
+## Core COE (Always Required)
 
-Agent0 selects from the full roster based on task needs:
+These three agents form the quality backbone and are **always spawned by default**:
+
+| Agent | Role | Veto Authority |
+|-------|------|----------------|
+| **SecurityEngineer** | Security review, dependency scans | Release veto on security |
+| **UXAgent** | Design system, accessibility | Release veto on UX |
+| **SoftwareEngineerInTest** | Test strategy, coverage, quality | Release veto on quality |
+
+The human operator can opt out of Core COE agents, but they are included by default.
+
+## Extended Team (As Needed)
+
+Agent0 selects additional agents based on task requirements:
 
 | Layer | Agents | Use For |
 |-------|--------|---------|
-| **Orchestration** | Agent0, SegmentTechLead | Coordination, sub-team leads |
+| **Orchestration** | SegmentTechLead | Code review, sub-team coordination |
 | **Product** | ProductManager, ProgramManager, ProductOperations, ProductMarketing | Strategy, planning, launch |
-| **Engineering** | SoftwareEngineer, SoftwareEngineerInTest, DevOpsEngineer | Code, quality, CI/CD |
-| **Security** | SecurityEngineer, SecurityResearcher | Reviews, threat research |
+| **Engineering** | SoftwareEngineer (1-N), DevOpsEngineer | Implementation, CI/CD |
+| **Security** | SecurityResearcher | Deep threat research |
 | **Data** | DataEngineer, DataAnalyst, DataScientist | Pipelines, analytics, ML |
-| **UX** | UXAgent, ProductDocumentation | Design, docs |
+| **UX** | ProductDocumentation | Technical writing, docs |
 
 ---
 

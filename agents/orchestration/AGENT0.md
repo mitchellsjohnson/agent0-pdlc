@@ -168,28 +168,40 @@ Gather and synthesize all inputs:
 
 #### Role Phase
 
-Determine team composition by analyzing what the task requires:
+Determine team composition by analyzing what the task requires.
 
-**Available Agent Types (select as needed):**
+**Core COE (Always Required)**
+
+These three agents form the quality backbone. Always spawn them unless the human operator explicitly opts out:
+
+| Agent | Role | Authority |
+|-------|------|-----------|
+| **SecurityEngineer** | Security review, dependency scans, threat assessment | Release veto on security grounds |
+| **UXAgent** | Design system compliance, accessibility, UX consistency | Release veto on UX grounds |
+| **SoftwareEngineerInTest** | Test strategy, coverage, quality gates | Release veto on quality grounds |
+
+**Extended Team (As Needed)**
+
+Spawn these agents based on what the specific task requires:
 
 | Layer | Agent Types | Use When |
 |-------|-------------|----------|
-| Orchestration | SegmentTechLead | Large initiatives need sub-coordinators |
+| Orchestration | SegmentTechLead | Large initiatives need sub-coordinators, code review gatekeeping |
 | Product | ProductManager, ProgramManager, ProductOperations, ProductMarketing | Strategic planning, launch, cross-team coordination |
-| Engineering | SoftwareEngineer, SoftwareEngineerInTest, DevOpsEngineer | Implementation, quality, CI/CD |
-| Security | SecurityEngineer, SecurityResearcher | Security review, threat research |
-| Data | DataEngineer, DataAnalyst, DataScientist | Pipelines, analytics, ML/AI |
-| UX | UXAgent, ProductDocumentation | Design, accessibility, docs |
+| Engineering | SoftwareEngineer (1-N), DevOpsEngineer | Implementation work, CI/CD changes |
+| Security | SecurityResearcher | Deep threat research, vulnerability analysis |
+| Data | DataEngineer, DataAnalyst, DataScientist | Pipelines, analytics, ML/AI features |
+| UX | ProductDocumentation | Technical writing, user guides, API docs |
 
 **Agent Selection Principles:**
-- Match agents to actual task needs (don't spawn agents you won't use)
+- **Core COE is default** - always include unless operator opts out
+- Match extended team to actual task needs
 - The human operator sets `max_agents` - respect this limit
-- Combine roles when work is small (one agent can wear multiple hats)
-- Scale up when work is parallelizable across specialists
+- Scale SoftwareEngineer count based on parallelizable work
 
 **Ask the human operator:**
 - "How many agents should I spin up maximum?" (default: no fixed limit, use judgment)
-- Which specialists are required vs optional for this scope
+- "Should I include the full Core COE or skip any?" (default: include all three)
 
 **REQUIRED: State Your Agent Strategy**
 
@@ -214,19 +226,20 @@ Example:
 ```
 ## Agent Strategy
 
-I will use the following agents for this sprint:
+### Core COE (Quality Gates)
+- **1 SecurityEngineer** - auth implementation security review, dependency scan
+- **1 UXAgent** - design system compliance for new UI components
+- **1 SoftwareEngineerInTest** - test coverage, integration tests, quality gates
 
+### Extended Team (Task-Specific)
 - **3 SoftwareEngineer agents** - dev-backend (auth service), dev-frontend (UI components), dev-api (REST endpoints)
-- **1 SecurityEngineer** - security review of auth implementation
-- **1 UXAgent** - ensure UI components match design system
 - **1 SegmentTechLead** - code reviews and architectural guidance
 - **1 DataEngineer** - new user analytics pipeline
 
-Total: 8 agents
+Total: 8 agents (3 Core COE + 5 Extended)
 
-Rationale: Auth feature touches backend, frontend, and API layers (3 devs for parallel work).
-Security review required for auth. UX review for new components. Tech lead for quality gates.
-Data engineer for analytics requirements.
+Rationale: Core COE ensures quality gates. Auth feature touches backend/frontend/API
+(3 devs for parallel work). Tech lead for code review. Data engineer for analytics.
 ```
 
 **Do NOT spawn agents until the human operator approves your strategy.**
