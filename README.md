@@ -122,8 +122,9 @@ Apply the CRIT Framework:
 
 CONTEXT: This is an empty/new project. Confirm framework is set up.
 
-ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
-(AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
+ROLE: You lead the SQUAD (SoftwareEngineerAgent teammates) and coordinate the COE
+(SoftwareEngineerInTestAgent, SecurityEngineerAgent, UXAgent). Use agent teams
+to spawn and coordinate teammates programmatically.
 
 INTERVIEW: Before planning, ask me:
 - What are we building? (web app, API, CLI, mobile app, etc.)
@@ -137,11 +138,13 @@ INTERVIEW: Before planning, ask me:
 TASK: After I answer:
 1. Create project structure and initial files
 2. Set up agent0-pdlc-<appname>/ folder with app-specific config
-3. Initialize Beads for task tracking
-4. Create a sprint plan for the MVP
-5. Provide me exact instructions to spin up the SQUAD and COE
+3. Create an agent team using TeamCreate
+4. Create tasks using TaskCreate for the sprint backlog
+5. Spawn SQUAD teammates using Task tool with team_name
+6. Spawn COE teammates (SET, Security, UX) for quality gates
+7. Coordinate work via SendMessage and TaskUpdate
 
-You are the orchestrator. Guide me step by step.
+You are the orchestrator. You spawn and manage teammates directly.
 
 Begin by checking for the framework, then ask your Interview questions.
 ```
@@ -189,8 +192,9 @@ CONTEXT: Orient yourself to this codebase. Explore the structure, understand
 what it does, identify the tech stack and architecture. Note which framework
 components exist.
 
-ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
-(AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
+ROLE: You lead the SQUAD (SoftwareEngineerAgent teammates) and coordinate the COE
+(SoftwareEngineerInTestAgent, SecurityEngineerAgent, UXAgent). Use agent teams
+to spawn and coordinate teammates programmatically.
 
 INTERVIEW: Before planning, ask me:
 - Sprint name and goals
@@ -200,15 +204,14 @@ INTERVIEW: Before planning, ask me:
 - Definition of done
 
 TASK: After I answer:
-1. Create a sprint plan with tasks in Beads, linked to tickets
-2. Determine how many AgentDev instances needed (1-4 based on parallelizable work)
-3. Provide me exact instructions to spin up each agent:
-   - What to name each agent (e.g., "<Sprint Name> - AgentDev1")
-   - The exact prompt to paste for each agent
-   - Which ticket(s) each agent owns
-   - Which window/tab to create them in (SQUAD vs COE)
+1. Create an agent team using TeamCreate
+2. Create tasks using TaskCreate for the sprint backlog
+3. Spawn SQUAD teammates using Task tool with team_name (1-4 based on work)
+4. Spawn COE teammates for quality gates
+5. Coordinate work via SendMessage and TaskUpdate
+6. Monitor progress via TaskList, synthesize results
 
-You are the orchestrator. Guide me step by step.
+You are the orchestrator. You spawn and manage teammates directly.
 
 Begin with your Context assessment and Interview questions.
 ```
@@ -217,35 +220,56 @@ Begin with your Context assessment and Interview questions.
 
 ---
 
-### Option C: Claude CLI (iTerm2 Multi-Session)
+### Option C: Agent Teams (Claude Code)
 
-For parallel multi-agent sessions, use Claude CLI in iTerm2. Use the same prompts above:
-- **New App**: Use the "New Application" prompt from Option A
-- **Existing App**: Use the "Existing Application" prompt from Option B
+Agent0 PDLC uses the **Gastown Pattern** for agent orchestration:
 
-See [workflows/CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) for detailed setup instructions.
+- **Agent0 (Mayor)**: Orchestrates the team, spawns workers, coordinates delivery
+- **SQUAD (City Workers)**: SoftwareEngineerAgent teammates doing implementation
+- **COE (Specialists)**: Quality gate agents (Testing, Security, UX)
 
-**SQUAD Window** - Agent0 + AgentDev instances working in parallel:
+**Two coordination layers work together:**
 
-![SQUAD Window](docs/images/claude-iterm2-squad.png)
+| Layer | Purpose | Tools |
+|-------|---------|-------|
+| **Agent Teams** | Real-time coordination | `TeamCreate`, `Task`, `SendMessage` |
+| **Beads** | Persistent written record | `bd create`, `bd update`, `bd sync` |
 
-**COE Window** - AgentSET + AgentSecurity + AgentUX specialists:
+Agent Teams enable direct Agent0 ↔ teammate communication. Beads provides the durable task tracking record that persists across sessions.
 
-![COE Window](docs/images/claude-iterm2-coe.png)
+Agent0 handles orchestration programmatically:
+- `TeamCreate` - Create a team with shared task list
+- `Task` tool with `team_name` - Spawn teammates
+- `SendMessage` - Direct communication with teammates
+- Beads (`bd`) - Persistent task tracking and sync
 
-**Layout Overview:**
+See [workflows/AGENT-TEAMS.md](workflows/AGENT-TEAMS.md) for detailed setup.
+
+**Gastown Architecture:**
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                          iTerm2 LAYOUT                                  │
-├─────────────────────────────────┬───────────────────────────────────────┤
-│         SQUAD WINDOW            │           COE WINDOW                  │
-│  ┌───────────┬───────────┐     │  ┌───────────┬───────────┐           │
-│  │  Agent0   │ AgentDev1 │     │  │ AgentSET  │ AgentSec  │           │
-│  │ (Leader)  │           │     │  │ (Testing) │ (Security)│           │
-│  ├───────────┼───────────┤     │  ├───────────┼───────────┤           │
-│  │ AgentDev2 │ AgentDev3 │     │  │ AgentUX   │  (Empty)  │           │
-│  └───────────┴───────────┘     │  └───────────┴───────────┘           │
-└─────────────────────────────────┴───────────────────────────────────────┘
+│                       GASTOWN PATTERN                                    │
+│                                                                         │
+│                        ┌─────────────┐                                  │
+│                        │   Agent0    │                                  │
+│                        │   (Mayor)   │                                  │
+│                        └──────┬──────┘                                  │
+│                               │                                         │
+│           TeamCreate ─────────┼───────── TaskCreate (Beads)             │
+│                               │                                         │
+│         ┌─────────────────────┼─────────────────────┐                  │
+│         │                     │                     │                  │
+│         ▼                     ▼                     ▼                  │
+│   ┌───────────┐         ┌───────────┐         ┌───────────┐           │
+│   │   SQUAD   │         │    COE    │         │   BEADS   │           │
+│   │ dev-back  │◄───────►│  tester   │         │ (written  │           │
+│   │ dev-front │SendMsg  │ security  │         │  record)  │           │
+│   │ dev-infra │         │    ux     │         │           │           │
+│   └───────────┘         └───────────┘         └───────────┘           │
+│                                                                         │
+│   Agent Teams = Real-time coordination (ephemeral)                     │
+│   Beads = Persistent task tracking (git-backed)                        │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -500,7 +524,7 @@ See [agents/README.md](agents/README.md) for the complete agent directory with a
 ### Workflows
 
 - [CURSOR-SETUP.md](workflows/CURSOR-SETUP.md) - Cursor IDE integration
-- [CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) - Claude with iTerm2
+- [AGENT-TEAMS.md](workflows/AGENT-TEAMS.md) - Agent Teams orchestration (Gastown Pattern)
 - [SQUAD-BOOTSTRAP.md](workflows/SQUAD-BOOTSTRAP.md) - Creating your SQUAD
 - [COE-BOOTSTRAP.md](workflows/COE-BOOTSTRAP.md) - Creating your COE
 - [SPRINT-WORKFLOW.md](workflows/SPRINT-WORKFLOW.md) - Running a sprint
