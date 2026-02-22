@@ -25,26 +25,27 @@ Agent0 PDLC is an open-source framework for orchestrating AI agent teams that wo
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           AGENT0 PDLC FRAMEWORK                             │
-│                      (16 Specialized Agents, 6 Layers)                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  ORCHESTRATION      PRODUCT         ENGINEERING      SECURITY       UX     │
-│  ┌───────────┐   ┌──────────┐     ┌───────────┐   ┌──────────┐  ┌───────┐  │
-│  │  Agent0   │   │ PM / PgM │     │ Software  │   │ Security │  │Designer│  │
-│  │ (Leader)  │   │ ProdOps  │     │ Engineer  │   │ Engineer │  │ Docs  │  │
-│  │  Segment  │   │Marketing │     │ SET/DevOps│   │Researcher│  │       │  │
-│  │ TechLeads │   │          │     │           │   │          │  │       │  │
-│  └───────────┘   └──────────┘     └───────────┘   └──────────┘  └───────┘  │
 │                                                                             │
-│                              DATA LAYER                                     │
-│              ┌──────────────────────────────────────────┐                  │
-│              │  DataEngineer  DataAnalyst  DataScientist │                  │
-│              └──────────────────────────────────────────┘                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                         BEADS PROTOCOL                                      │
-│              Machine-readable task tracking & coordination                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                        YOUR CODEBASE                                        │
-│                 Delivered, Tested, Secure, Beautiful                        │
+│   ┌─────────────┐     ┌─────────────┐     ┌─────────────┐                  │
+│   │   Agent0    │────▶│    SQUAD    │     │     COE     │                  │
+│   │  (Tech Lead)│     │  AgentDev1  │     │  AgentSET   │                  │
+│   │             │     │  AgentDev2  │     │  AgentSec   │                  │
+│   │  Orchestrate│     │  AgentDev3  │     │  AgentUX    │                  │
+│   │  Plan       │     │     ...     │     │             │                  │
+│   │  QA         │     └─────────────┘     └─────────────┘                  │
+│   └─────────────┘            │                   │                         │
+│          │                   │                   │                         │
+│          ▼                   ▼                   ▼                         │
+│   ┌─────────────────────────────────────────────────────────────────────┐  │
+│   │                         BEADS PROTOCOL                              │  │
+│   │              Machine-readable task tracking & coordination          │  │
+│   └─────────────────────────────────────────────────────────────────────┘  │
+│                                    │                                        │
+│                                    ▼                                        │
+│   ┌─────────────────────────────────────────────────────────────────────┐  │
+│   │                        YOUR CODEBASE                                │  │
+│   │                 Delivered, Tested, Secure, Beautiful                │  │
+│   └─────────────────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -82,7 +83,7 @@ git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
 
 **Organization-Level Config (Optional)**
 
-If your organization has a shared config repo (e.g., `agent0-pdlc-yourorg`), clone it too:
+If your organization has a shared config repo (e.g., `agent0-pdlc-sonatype`), clone it too:
 ```bash
 git clone https://github.com/yourorg/agent0-pdlc-yourorg.git agent0-pdlc-yourorg
 ```
@@ -108,12 +109,12 @@ FIRST: Check if the framework exists in this workspace:
 - If missing, tell me to run: git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
 
 FRAMEWORK (read if exists):
-1. agent0-pdlc/agents/orchestration/AGENT0.md - Your operating manual
+1. agent0-pdlc/agents/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
 
 ORGANIZATION (check if exists):
-- Look for agent0-pdlc-*/ folders (e.g., agent0-pdlc-yourorg)
+- Look for agent0-pdlc-*/ folders (e.g., agent0-pdlc-sonatype)
 - If found, read ORGANIZATION-RULES.md and policies/
 
 We are starting a NEW APPLICATION from scratch.
@@ -122,9 +123,8 @@ Apply the CRIT Framework:
 
 CONTEXT: This is an empty/new project. Confirm framework is set up.
 
-ROLE: You lead the SQUAD (SoftwareEngineerAgent teammates) and coordinate the COE
-(SoftwareEngineerInTestAgent, SecurityEngineerAgent, UXAgent). Use agent teams
-to spawn and coordinate teammates programmatically.
+ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
+(AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
 
 INTERVIEW: Before planning, ask me:
 - What are we building? (web app, API, CLI, mobile app, etc.)
@@ -138,13 +138,11 @@ INTERVIEW: Before planning, ask me:
 TASK: After I answer:
 1. Create project structure and initial files
 2. Set up agent0-pdlc-<appname>/ folder with app-specific config
-3. Create an agent team using TeamCreate
-4. Create tasks using TaskCreate for the sprint backlog
-5. Spawn SQUAD teammates using Task tool with team_name
-6. Spawn COE teammates (SET, Security, UX) for quality gates
-7. Coordinate work via SendMessage and TaskUpdate
+3. Initialize Beads for task tracking
+4. Create a sprint plan for the MVP
+5. Provide me exact instructions to spin up the SQUAD and COE
 
-You are the orchestrator. You spawn and manage teammates directly.
+You are the orchestrator. Guide me step by step.
 
 Begin by checking for the framework, then ask your Interview questions.
 ```
@@ -156,7 +154,7 @@ Begin by checking for the framework, then ask your Interview questions.
 This shows Agent0 orchestrating a sprint with:
 - **Agent0**: Leading the sprint, coordinating all agents
 - **AgentDev1**: Fixing Jest ESM issues
-- **AgentSecurity**: Scanning dependencies via SCA tool
+- **AgentSecurity**: Scanning dependencies via sonatype-mcp
 - **AgentUX**: Reviewing CLI output
 - **AgentSET**: Reviewing tests after Dev1 completes
 - **19 files created/modified** in parallel execution
@@ -180,7 +178,7 @@ If agent0-pdlc/ is missing, tell me to run:
 git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
 
 FRAMEWORK (read in order of precedence: app > org > generic):
-1. agent0-pdlc/agents/orchestration/AGENT0.md - Your operating manual
+1. agent0-pdlc/agents/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
 4. agent0-pdlc-<org>/ORGANIZATION-RULES.md - Org policies (if exists)
@@ -192,26 +190,26 @@ CONTEXT: Orient yourself to this codebase. Explore the structure, understand
 what it does, identify the tech stack and architecture. Note which framework
 components exist.
 
-ROLE: You lead the SQUAD (SoftwareEngineerAgent teammates) and coordinate the COE
-(SoftwareEngineerInTestAgent, SecurityEngineerAgent, UXAgent). Use agent teams
-to spawn and coordinate teammates programmatically.
+ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
+(AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
 
 INTERVIEW: Before planning, ask me:
 - Sprint name and goals
-- Ticket numbers in scope (e.g., TICKET-123, TICKET-124, TICKET-125)
+- Jira ticket numbers in scope (e.g., PROJ-123, PROJ-124, PROJ-125)
 - Requirements (mockups, PRDs, user stories)
 - Constraints (time, scope, dependencies)
 - Definition of done
 
 TASK: After I answer:
-1. Create an agent team using TeamCreate
-2. Create tasks using TaskCreate for the sprint backlog
-3. Spawn SQUAD teammates using Task tool with team_name (1-4 based on work)
-4. Spawn COE teammates for quality gates
-5. Coordinate work via SendMessage and TaskUpdate
-6. Monitor progress via TaskList, synthesize results
+1. Create a sprint plan with tasks in Beads, linked to Jira tickets
+2. Determine how many AgentDev instances needed (1-4 based on parallelizable work)
+3. Provide me exact instructions to spin up each agent:
+   - What to name each agent (e.g., "<Sprint Name> - AgentDev1")
+   - The exact prompt to paste for each agent
+   - Which Jira ticket(s) each agent owns
+   - Which window/tab to create them in (SQUAD vs COE)
 
-You are the orchestrator. You spawn and manage teammates directly.
+You are the orchestrator. Guide me step by step.
 
 Begin with your Context assessment and Interview questions.
 ```
@@ -220,56 +218,35 @@ Begin with your Context assessment and Interview questions.
 
 ---
 
-### Option C: Agent Teams (Claude Code)
+### Option C: Claude CLI (iTerm2 Multi-Session)
 
-Agent0 PDLC uses the **Gastown Pattern** for agent orchestration:
+For parallel multi-agent sessions, use Claude CLI in iTerm2. Use the same prompts above:
+- **New App**: Use the "New Application" prompt from Option A
+- **Existing App**: Use the "Existing Application" prompt from Option B
 
-- **Agent0 (Mayor)**: Orchestrates the team, spawns workers, coordinates delivery
-- **SQUAD (City Workers)**: SoftwareEngineerAgent teammates doing implementation
-- **COE (Specialists)**: Quality gate agents (Testing, Security, UX)
+See [workflows/CLAUDE-ITERM2-SETUP.md](workflows/CLAUDE-ITERM2-SETUP.md) for detailed setup instructions.
 
-**Two coordination layers work together:**
+**SQUAD Window** - Agent0 + AgentDev instances working in parallel:
 
-| Layer | Purpose | Tools |
-|-------|---------|-------|
-| **Agent Teams** | Real-time coordination | `TeamCreate`, `Task`, `SendMessage` |
-| **Beads** | Persistent written record | `bd create`, `bd update`, `bd sync` |
+![SQUAD Window](docs/images/claude-iterm2-squad.png)
 
-Agent Teams enable direct Agent0 ↔ teammate communication. Beads provides the durable task tracking record that persists across sessions.
+**COE Window** - AgentSET + AgentSecurity + AgentUX specialists:
 
-Agent0 handles orchestration programmatically:
-- `TeamCreate` - Create a team with shared task list
-- `Task` tool with `team_name` - Spawn teammates
-- `SendMessage` - Direct communication with teammates
-- Beads (`bd`) - Persistent task tracking and sync
+![COE Window](docs/images/claude-iterm2-coe.png)
 
-See [workflows/AGENT-TEAMS.md](workflows/AGENT-TEAMS.md) for detailed setup.
-
-**Gastown Architecture:**
+**Layout Overview:**
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                       GASTOWN PATTERN                                    │
-│                                                                         │
-│                        ┌─────────────┐                                  │
-│                        │   Agent0    │                                  │
-│                        │   (Mayor)   │                                  │
-│                        └──────┬──────┘                                  │
-│                               │                                         │
-│           TeamCreate ─────────┼───────── TaskCreate (Beads)             │
-│                               │                                         │
-│         ┌─────────────────────┼─────────────────────┐                  │
-│         │                     │                     │                  │
-│         ▼                     ▼                     ▼                  │
-│   ┌───────────┐         ┌───────────┐         ┌───────────┐           │
-│   │   SQUAD   │         │    COE    │         │   BEADS   │           │
-│   │ dev-back  │◄───────►│  tester   │         │ (written  │           │
-│   │ dev-front │SendMsg  │ security  │         │  record)  │           │
-│   │ dev-infra │         │    ux     │         │           │           │
-│   └───────────┘         └───────────┘         └───────────┘           │
-│                                                                         │
-│   Agent Teams = Real-time coordination (ephemeral)                     │
-│   Beads = Persistent task tracking (git-backed)                        │
-└─────────────────────────────────────────────────────────────────────────┘
+│                          iTerm2 LAYOUT                                  │
+├─────────────────────────────────┬───────────────────────────────────────┤
+│         SQUAD WINDOW            │           COE WINDOW                  │
+│  ┌───────────┬───────────┐     │  ┌───────────┬───────────┐           │
+│  │  Agent0   │ AgentDev1 │     │  │ AgentSET  │ AgentSec  │           │
+│  │ (Leader)  │           │     │  │ (Testing) │ (Security)│           │
+│  ├───────────┼───────────┤     │  ├───────────┼───────────┤           │
+│  │ AgentDev2 │ AgentDev3 │     │  │ AgentUX   │  (Empty)  │           │
+│  └───────────┴───────────┘     │  └───────────┴───────────┘           │
+└─────────────────────────────────┴───────────────────────────────────────┘
 ```
 
 ---
@@ -314,8 +291,8 @@ Agent0 PDLC uses a three-tier inheritance model that allows customization at eac
 │  - Approved tech stack                                                      │
 │  - Organization-wide AI skills                                              │
 │  - MCP tools, security tools, build tools                                   │
-│  - Ticketing integrations (ticketing system, etc.)                          │
-│  Example: agent0-pdlc-yourorg/ (your organization's internal policies)      │
+│  - Ticketing integrations (Jira, Linear, etc.)                              │
+│  Example: agent0-pdlc-sonatype/ (Sonatype's internal policies)              │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼ Each app extends org
@@ -327,7 +304,7 @@ Agent0 PDLC uses a three-tier inheritance model that allows customization at eac
 │  - App-specific security strategy                                           │
 │  - App-specific UX strategy                                                 │
 │  - Codebase-specific skills                                                 │
-│  Example: agent0-pdlc-yourapp/ (your application config)                    │
+│  Example: agent0-pdlc-nexus-internal/ (Nexus Repository config)             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -356,42 +333,37 @@ mkdir agent0-pdlc-<your-org>
 cd agent0-pdlc-<your-org>
 git init
 
-# Copy the organization template
-cp -r ../agent0-pdlc/templates/organization/* .
+# Mirror the generic framework structure
+mkdir -p agents/{orchestration,engineering,product,security,ux,data}
+mkdir -p shared/{policies,integrations,mcp,templates}
+mkdir -p shared/skills/{security,ux,set,engineering}
+mkdir -p products
 
-# Customize these files:
-# - ORGANIZATION-RULES.md (your org's non-negotiable rules)
-# - policies/SECURITY-POLICY.md (link to your security policy)
-# - policies/UX-STANDARDS.md (link to your design system)
-# - policies/TECH-STACK.md (approved languages, frameworks)
-# - skills/ (organization-specific AI skills)
+# Copy starter policies from generic framework
+cp ../agent0-pdlc/shared/policies/* shared/policies/
 ```
 
-**Key files to customize:**
+**Key directories to populate:**
 
-| File | Purpose | What to Add |
-|------|---------|-------------|
-| `ORGANIZATION-RULES.md` | Org-wide rules | Your compliance, legal, process requirements |
-| `policies/SECURITY-POLICY.md` | Security standards | Link to your security policy, scanning tools |
-| `policies/UX-STANDARDS.md` | Design system | Link to your component library, style guide |
-| `policies/TECH-STACK.md` | Approved technologies | Languages, frameworks, databases allowed |
-| `skills/` | AI skills | Custom skills for your org's tools |
+| Directory | Purpose | What to Add |
+|-----------|---------|-------------|
+| `shared/policies/` | Org-wide standards | Security, UX, Testing, Tech Stack |
+| `shared/integrations/` | Tool integrations | Jira, GitHub, CI/CD, SCA scanner |
+| `shared/mcp/` | MCP servers | Docs for each MCP available to agents |
+| `shared/skills/{role}/` | Agent skills | Cursor SKILL.md files by role |
+| `products/{product}/` | Product configs | Product-specific skills, integrations |
 
 ### 3. Add Application-Level Configuration
 
 In your application repository:
 
 ```bash
-# Create the app-level folder
+# Create the app-level folder in your app repo
 mkdir agent0-pdlc-<app-name>
 
-# Copy the application template
-cp -r ../agent0-pdlc/templates/application/* agent0-pdlc-<app-name>/
-
-# Customize these files:
+# Add app-specific files:
 # - BUILD-INSTRUCTIONS.md (how to build THIS app)
 # - TESTING-STRATEGY.md (testing for THIS app)
-# - agents/ (app-specific agent overrides)
 ```
 
 ### 4. Give AI Access to All Tiers
@@ -411,18 +383,13 @@ When working with your AI agent, ensure it has access to:
 
 ### Agents
 
-The framework supports 16 specialized agents across 6 layers:
-
-| Layer | Agents | Responsibility |
-|-------|--------|----------------|
-| **Orchestration** | Agent0, SegmentTechLead | Coordinate teams, plan sprints, manage delivery |
-| **Product** | ProductManager, ProgramManager, ProductOps, ProductMarketing | Define what to build, manage releases, go-to-market |
-| **Engineering** | SoftwareEngineer, SoftwareEngineerInTest, DevOpsEngineer | Build features, write tests, manage CI/CD |
-| **Security** | SecurityEngineer, SecurityResearcher | Scan vulnerabilities, research threats, enforce security |
-| **Data** | DataEngineer, DataAnalyst, DataScientist | Build pipelines, analyze data, create ML models |
-| **UX** | UXAgent, ProductDocumentation | Design UX, accessibility, create user documentation |
-
-See [agents/README.md](agents/README.md) for the full agent directory.
+| Agent | Role | Responsibility |
+|-------|------|----------------|
+| **Agent0** | Tech Lead / Orchestrator | Plans sprints, assigns work, QAs output, manages handoffs |
+| **AgentDev** | Software Engineer | Implements features, fixes bugs, writes code |
+| **AgentSET** | Software Engineer in Test | Defines test strategy, ensures quality, blocks on failures |
+| **AgentSecurity** | Security Architect | Reviews security, scans dependencies, has release veto |
+| **AgentUX** | UX Architect | Enforces design standards, ensures consistency |
 
 ### Beads Protocol
 
@@ -467,7 +434,7 @@ Agent0 accepts requirements from **any source**. Use whatever tools your team al
 | **Documentation** | Google Docs, Notion, Confluence |
 | **AI Chat** | ChatGPT, Claude, Gemini conversations |
 | **Traditional** | PRDs, user stories, BDD specs |
-| **Ticketing** | Tickets, GitHub Issues, Linear |
+| **Ticketing** | Jira tickets, GitHub Issues, Linear |
 
 ### The CRIT Framework
 
@@ -505,26 +472,16 @@ Agent0 uses the **CRIT Framework** to process your requirements:
 
 ### Agent Operating Manuals
 
-See [agents/README.md](agents/README.md) for the complete agent directory with all 16 agents.
-
-**Core Agents:**
-- [Agent0](agents/orchestration/AGENT0.md) - Product Owner / Technical Lead
-- [SoftwareEngineer](agents/engineering/SOFTWARE-ENGINEER-AGENT.md) - Software Engineer
-- [SoftwareEngineerInTest](agents/engineering/SOFTWARE-ENGINEER-IN-TEST-AGENT.md) - Software Engineer in Test
-- [SecurityEngineer](agents/security/SECURITY-ENGINEER-AGENT.md) - Security Architect
-- [UXAgent](agents/ux/UX-AGENT.md) - UX Architect / Product Designer
-
-**Extended Team:**
-- [SegmentTechLead](agents/orchestration/SEGMENT-TECH-LEAD-AGENT.md) - Segment Coordinator
-- [DevOpsEngineer](agents/engineering/DEVOPS-ENGINEER-AGENT.md) - CI/CD & Infrastructure
-- [ProductManager](agents/product/PRODUCT-MANAGER-AGENT.md) - Roadmap & Prioritization
-- [DataEngineer](agents/data/DATA-ENGINEER-AGENT.md) - Data Pipelines
-- [And 6 more...](agents/README.md)
+- [AGENT0.md](agents/AGENT0.md) - Product Owner / Technical Lead
+- [AGENTDEV.md](agents/AGENTDEV.md) - Software Engineer
+- [AGENTSET.md](agents/AGENTSET.md) - Software Engineer in Test
+- [AGENTSECURITY.md](agents/AGENTSECURITY.md) - Security Architect
+- [AGENTUX.md](agents/AGENTUX.md) - UX Architect
 
 ### Workflows
 
+- [CLAUDE-SETUP.md](workflows/CLAUDE-SETUP.md) - Claude Code CLI setup (recommended)
 - [CURSOR-SETUP.md](workflows/CURSOR-SETUP.md) - Cursor IDE integration
-- [AGENT-TEAMS.md](workflows/AGENT-TEAMS.md) - Agent Teams orchestration (Gastown Pattern)
 - [SQUAD-BOOTSTRAP.md](workflows/SQUAD-BOOTSTRAP.md) - Creating your SQUAD
 - [COE-BOOTSTRAP.md](workflows/COE-BOOTSTRAP.md) - Creating your COE
 - [SPRINT-WORKFLOW.md](workflows/SPRINT-WORKFLOW.md) - Running a sprint

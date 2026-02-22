@@ -2,6 +2,8 @@
 
 This guide explains how to set up and use Agent0 PDLC with Cursor IDE.
 
+Reference: [Cursor Subagents](https://cursor.com/docs/context/subagents) | [Cursor Skills](https://cursor.com/docs/context/skills)
+
 ---
 
 ## Prerequisites
@@ -48,7 +50,7 @@ Add to `.cursor/settings.json`:
 {
   "cursor.agent.defaultModel": "claude-sonnet-4",
   "cursor.agent.contextFiles": [
-    "agent0-pdlc/agents/orchestration/AGENT0.md",
+    "agent0-pdlc/agents/AGENT0.md",
     "agent0-pdlc/GLOBAL-RULES.md",
     "agent0-pdlc/workflows/BEADS-PROTOCOL.md"
   ]
@@ -77,7 +79,7 @@ Choose your preferred model:
 You are Agent0, the Product Owner and Technical Lead for this project.
 
 Read and internalize these documents in order:
-1. agent0-pdlc/agents/orchestration/AGENT0.md - Your operating manual
+1. agent0-pdlc/agents/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Communication protocol
 4. agent0-pdlc-org/ORGANIZATION-RULES.md - Organization policies
@@ -102,16 +104,69 @@ Agent0 will analyze your codebase and recommend:
 
 ---
 
-## Running a SQUAD in Cursor
+## Multi-Agent Orchestration in Cursor
 
-### Single-Tab Mode (Simple)
+Cursor supports two approaches for running Agent0 PDLC teams:
 
-Use one Cursor agent panel for Agent0.
-Agent0 handles all tasks sequentially.
+### Option 1: Subagents (Native Delegation)
 
-**Best for:** Small projects, single-threaded work
+Cursor has built-in [subagents](https://cursor.com/docs/context/subagents) that Agent0 can delegate tasks to. Each subagent runs in its own context window and returns results to the parent. Subagents can run in parallel.
 
-### Multi-Tab Mode (Recommended)
+**Create custom subagents in `.cursor/agents/`:**
+
+```
+.cursor/agents/
+├── security-reviewer.md    # SecurityEngineerAgent
+├── tester.md               # SoftwareEngineerInTestAgent
+├── ux-reviewer.md          # UXAgent
+└── debugger.md             # Debugging specialist
+```
+
+**Example: `.cursor/agents/security-reviewer.md`**
+
+```markdown
+---
+name: security-reviewer
+description: SecurityEngineerAgent. Use when implementing auth, payments, handling sensitive data, or adding dependencies. Pre-push Guide MCP dependency check is mandatory.
+model: inherit
+---
+
+You are SecurityEngineerAgent on this project.
+
+Read:
+- agent0-pdlc-<org>/agents/security/Security-Engineer.md
+- agent0-pdlc-<org>/shared/policies/SECURITY-POLICY.md
+
+Skills:
+- agent0-pdlc-<org>/shared/skills/security/lifecycle-scan.md
+- agent0-pdlc-<org>/shared/skills/security/threat-modeling.md
+
+When invoked:
+1. Scan all new/changed dependencies via Guide MCP
+2. Review code for OWASP Top 10 vulnerabilities
+3. Check for hardcoded secrets
+4. Report findings by severity (Critical/High/Medium/Low)
+```
+
+**Invoke subagents:**
+```
+/security-reviewer review the authentication module
+/tester run tests and check coverage for the new API
+```
+
+Or let the agent delegate automatically based on descriptions.
+
+**Subagents vs Agent0 PDLC mapping:**
+
+| Cursor Concept | Agent0 PDLC Mapping |
+|---------------|---------------------|
+| Parent agent | Agent0 (orchestrator) |
+| Custom subagents | COE specialists (Security, SET, UX) |
+| Background subagents | Parallel SQUAD work |
+| Built-in explore | Codebase research |
+| Built-in bash | Build/test execution |
+
+### Option 2: Multi-Tab Mode
 
 Open multiple agent panels for parallel work:
 
@@ -132,7 +187,7 @@ Open multiple agent panels for parallel work:
 You are AgentDev1, a Software Engineer on this project.
 
 Read and internalize:
-1. agent0-pdlc/agents/engineering/SOFTWARE-ENGINEER-AGENT.md - Your operating manual
+1. agent0-pdlc/agents/AGENTDEV.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc-org/ORGANIZATION-RULES.md - Org policies
 4. agent0-pdlc-<app>/BUILD-INSTRUCTIONS.md - How to build
@@ -148,7 +203,7 @@ Acknowledge and await your first task from Agent0.
 You are AgentSET, the Software Engineer in Test for this project.
 
 Read and internalize:
-1. agent0-pdlc/agents/engineering/SOFTWARE-ENGINEER-IN-TEST-AGENT.md - Your operating manual
+1. agent0-pdlc/agents/AGENTSET.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc-org/policies/TESTING-POLICY.md - Org testing policy
 4. agent0-pdlc-<app>/TESTING-STRATEGY.md - App testing strategy
@@ -164,7 +219,7 @@ Acknowledge and report your baseline assessment.
 You are AgentSecurity, the Security Architect for this project.
 
 Read and internalize:
-1. agent0-pdlc/agents/security/SECURITY-ENGINEER-AGENT.md - Your operating manual
+1. agent0-pdlc/agents/AGENTSECURITY.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc-org/policies/SECURITY-POLICY.md - Org security policy
 4. agent0-pdlc-<app>/SECURITY-STRATEGY.md - App security strategy
@@ -180,7 +235,7 @@ Acknowledge and report your baseline security assessment.
 You are AgentUX, the UX Architect for this project.
 
 Read and internalize:
-1. agent0-pdlc/agents/ux/UX-AGENT.md - Your operating manual
+1. agent0-pdlc/agents/AGENTUX.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc-org/policies/UX-STANDARDS.md - Org UX standards
 4. agent0-pdlc-<app>/UX-STRATEGY.md - App UX strategy
@@ -294,7 +349,7 @@ Read HANDOFF.md and Beads to understand current state.
 
 Ensure all three tiers are accessible:
 ```bash
-ls agent0-pdlc/agents/orchestration/AGENT0.md
+ls agent0-pdlc/agents/AGENT0.md
 ls agent0-pdlc-org/ORGANIZATION-RULES.md
 ls agent0-pdlc-<app>/BUILD-INSTRUCTIONS.md
 ```
@@ -311,7 +366,7 @@ You MUST follow these rules. Acknowledge each rule.
 
 ```
 Your context may have been lost. Please re-read:
-1. agent0-pdlc/agents/orchestration/AGENT0.md
+1. agent0-pdlc/agents/AGENT0.md
 2. HANDOFF.md
 3. yarn bd:list
 
