@@ -28,7 +28,6 @@ segments  PM PgM PO Mkt  |    |    |  |         | |   |   |  |         |
 | Agent | File | Role |
 |-------|------|------|
 | Agent0 | [orchestration/AGENT0.md](orchestration/AGENT0.md) | Tech Lead, Product Owner, Orchestrator |
-| SegmentTechLead | [orchestration/SEGMENT-TECH-LEAD-AGENT.md](orchestration/SEGMENT-TECH-LEAD-AGENT.md) | Segment coordinator under Agent0 |
 
 ### Product Layer
 | Agent | File | Role |
@@ -50,6 +49,7 @@ segments  PM PgM PO Mkt  |    |    |  |         | |   |   |  |         |
 | SoftwareEngineer | [engineering/SOFTWARE-ENGINEER-AGENT.md](engineering/SOFTWARE-ENGINEER-AGENT.md) | Implements features, writes code |
 | SoftwareEngineerInTest | [engineering/SOFTWARE-ENGINEER-IN-TEST-AGENT.md](engineering/SOFTWARE-ENGINEER-IN-TEST-AGENT.md) | Owns quality, test strategy |
 | DevOpsEngineer | [engineering/DEVOPS-ENGINEER-AGENT.md](engineering/DEVOPS-ENGINEER-AGENT.md) | Owns CI/CD/infrastructure |
+| SegmentTechLead | [engineering/SEGMENT-TECH-LEAD-AGENT.md](engineering/SEGMENT-TECH-LEAD-AGENT.md) | Segment coordinator under Agent0 |
 
 ### Security Layer
 | Agent | File | Role |
