@@ -203,23 +203,31 @@ Spawn these agents based on what the specific task requires:
 - "How many agents should I spin up maximum?" (default: no fixed limit, use judgment)
 - "Should I include the full Core COE or skip any?" (default: include all three)
 
-**REQUIRED: State Your Agent Strategy**
+**REQUIRED: State Your Agent Strategy (with Model Tiers)**
 
-Before spawning any agents, you MUST explicitly state your agent strategy to the human operator. This is not optional.
+Before spawning any agents, you MUST explicitly state your agent strategy including model tier assignments. This is not optional.
+
+**Read `shared/skills/orchestration/model-cost-optimization.md` BEFORE creating your strategy.** If an org-level version exists (e.g., `agent0-pdlc-<org>/shared/skills/orchestration/model-cost-optimization.md`), read that too -- it maps tiers to specific approved models.
 
 Format:
 ```
 ## Agent Strategy
 
-I will use the following agents for this sprint:
+### Core COE (Quality Gates)
+| Agent | Tier | Model | Rationale |
+|-------|------|-------|-----------|
+| SecurityEngineer | [tier] | [model] | [why this tier] |
+| UXAgent | [tier] | [model] | [why this tier] |
+| SET | [tier] | [model] | [why this tier] |
 
-- **[N] SoftwareEngineer agents** - [specific purpose for each or group]
-- **[N] [AgentType]** - [why this agent is needed]
-- ...
+### SQUAD (Implementation)
+| Agent | Tier | Model | Rationale |
+|-------|------|-------|-----------|
+| Dev1 ([scope]) | [tier] | [model] | [why this tier] |
+| Dev2 ([scope]) | [tier] | [model] | [why this tier] |
 
 Total: [X] agents
-
-Rationale: [Brief explanation of why this composition fits the work]
+Estimated cost: ~[X]% of all-Orchestrator baseline
 ```
 
 Example:
@@ -227,20 +235,30 @@ Example:
 ## Agent Strategy
 
 ### Core COE (Quality Gates)
-- **1 SecurityEngineer** - auth implementation security review, dependency scan
-- **1 UXAgent** - design system compliance for new UI components
-- **1 SoftwareEngineerInTest** - test coverage, integration tests, quality gates
+| Agent | Tier | Model | Rationale |
+|-------|------|-------|-----------|
+| SecurityEngineer | High | opus | Auth review, veto authority, pre-push gate |
+| UXAgent | Mid | sonnet | Design system compliance |
+| SoftwareEngineerInTest | Mid | sonnet | Test coverage, quality gates |
 
-### Extended Team (Task-Specific)
-- **3 SoftwareEngineer agents** - dev-backend (auth service), dev-frontend (UI components), dev-api (REST endpoints)
-- **1 SegmentTechLead** - code reviews and architectural guidance
-- **1 DataEngineer** - new user analytics pipeline
+### SQUAD (Implementation)
+| Agent | Tier | Model | Rationale |
+|-------|------|-------|-----------|
+| Dev1 (backend) | Mid | sonnet | Auth service, standard API work |
+| Dev2 (frontend) | Mid | sonnet | UI components |
+| Dev3 (docs) | Fast | haiku | Documentation updates only |
 
-Total: 8 agents (3 Core COE + 5 Extended)
-
-Rationale: Core COE ensures quality gates. Auth feature touches backend/frontend/API
-(3 devs for parallel work). Tech lead for code review. Data engineer for analytics.
+Total: 6 agents
+Estimated cost: ~30% of all-Opus baseline
+Savings: 3 agents at Mid, 1 at Fast instead of 6 at Opus
 ```
+
+**Model Tier Rules:**
+- **Orchestrator**: Agent0 only (you). Best reasoning available.
+- **High**: COE agents with veto authority on critical reviews.
+- **Mid**: Standard implementation, advisory COE. This is the default.
+- **Fast**: Documentation, exploration, boilerplate, simple refactoring.
+- Never assign all agents the same tier. Differentiate based on task complexity.
 
 **Do NOT spawn agents until the human operator approves your strategy.**
 

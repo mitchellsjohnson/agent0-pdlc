@@ -109,13 +109,14 @@ FIRST: Check if the framework exists in this workspace:
 - If missing, tell me to run: git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
 
 FRAMEWORK (read if exists):
-1. agent0-pdlc/agents/AGENT0.md - Your operating manual
+1. agent0-pdlc/agents/orchestration/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
+4. agent0-pdlc/shared/skills/orchestration/model-cost-optimization.md - REQUIRED: Model cost optimization
 
 ORGANIZATION (check if exists):
 - Look for agent0-pdlc-*/ folders (e.g., agent0-pdlc-sonatype)
-- If found, read ORGANIZATION-RULES.md and policies/
+- If found, read ORGANIZATION-RULES.md, policies/, and shared/skills/orchestration/
 
 We are starting a NEW APPLICATION from scratch.
 
@@ -123,8 +124,9 @@ Apply the CRIT Framework:
 
 CONTEXT: This is an empty/new project. Confirm framework is set up.
 
-ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
-(AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
+ROLE: You lead the SQUAD and COE. For EVERY agent you plan to spawn,
+you MUST assign a model tier (Orchestrator/High/Mid/Fast) using the
+model-cost-optimization skill. Do NOT default all agents to the same model.
 
 INTERVIEW: Before planning, ask me:
 - What are we building? (web app, API, CLI, mobile app, etc.)
@@ -140,7 +142,9 @@ TASK: After I answer:
 2. Set up agent0-pdlc-<appname>/ folder with app-specific config
 3. Initialize Beads for task tracking
 4. Create a sprint plan for the MVP
-5. Provide me exact instructions to spin up the SQUAD and COE
+5. Present your Agent Strategy with model tier for EACH agent
+   (use the model-cost-optimization skill format)
+6. Provide exact instructions to spin up SQUAD and COE with assigned models
 
 You are the orchestrator. Guide me step by step.
 
@@ -178,11 +182,13 @@ If agent0-pdlc/ is missing, tell me to run:
 git clone https://github.com/mitchellsjohnson/agent0-pdlc.git agent0-pdlc
 
 FRAMEWORK (read in order of precedence: app > org > generic):
-1. agent0-pdlc/agents/AGENT0.md - Your operating manual
+1. agent0-pdlc/agents/orchestration/AGENT0.md - Your operating manual
 2. agent0-pdlc/GLOBAL-RULES.md - Non-negotiable rules
 3. agent0-pdlc/workflows/BEADS-PROTOCOL.md - Task tracking protocol
-4. agent0-pdlc-<org>/ORGANIZATION-RULES.md - Org policies (if exists)
-5. agent0-pdlc-<app>/BUILD-INSTRUCTIONS.md - App build guide (if exists)
+4. agent0-pdlc/shared/skills/orchestration/model-cost-optimization.md - REQUIRED
+5. agent0-pdlc-<org>/ORGANIZATION-RULES.md - Org policies (if exists)
+6. agent0-pdlc-<org>/shared/skills/orchestration/ - Org model/cost config (if exists)
+7. agent0-pdlc-<app>/BUILD-INSTRUCTIONS.md - App build guide (if exists)
 
 Apply the CRIT Framework to bootstrap this sprint:
 
@@ -190,24 +196,27 @@ CONTEXT: Orient yourself to this codebase. Explore the structure, understand
 what it does, identify the tech stack and architecture. Note which framework
 components exist.
 
-ROLE: You lead the SQUAD (Agent0 + AgentDev instances) and coordinate the COE 
-(AgentSET, AgentSecurity, AgentUX). The COE is always recommended for quality.
+ROLE: You lead the SQUAD and COE. For EVERY agent you plan to spawn,
+you MUST assign a model tier (Orchestrator/High/Mid/Fast) using the
+model-cost-optimization skill. Do NOT default all agents to the same model.
+Optimize for cost while preserving quality where it matters.
 
 INTERVIEW: Before planning, ask me:
 - Sprint name and goals
-- Jira ticket numbers in scope (e.g., PROJ-123, PROJ-124, PROJ-125)
+- Ticket numbers in scope (e.g., PROJ-123, PROJ-124, PROJ-125)
 - Requirements (mockups, PRDs, user stories)
 - Constraints (time, scope, dependencies)
 - Definition of done
 
 TASK: After I answer:
-1. Create a sprint plan with tasks in Beads, linked to Jira tickets
-2. Determine how many AgentDev instances needed (1-4 based on parallelizable work)
-3. Provide me exact instructions to spin up each agent:
-   - What to name each agent (e.g., "<Sprint Name> - AgentDev1")
-   - The exact prompt to paste for each agent
-   - Which Jira ticket(s) each agent owns
-   - Which window/tab to create them in (SQUAD vs COE)
+1. Create a sprint plan with tasks in Beads, linked to tickets
+2. Present your Agent Strategy with model tier and specific model for EACH agent
+   (use the table format from model-cost-optimization skill)
+3. Show estimated cost savings vs all-Orchestrator baseline
+4. After I approve, provide exact instructions to spin up each agent:
+   - Agent name, model tier, specific model to use
+   - The exact prompt to paste (including --model flag or model setting)
+   - Which ticket(s) each agent owns
 
 You are the orchestrator. Guide me step by step.
 
